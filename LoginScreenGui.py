@@ -1,8 +1,8 @@
 
 
 # import Qt depenencies
-from PyQt4.Core import *
-from PyQt4.Gui import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 class LoginWindow:
     def __init__(self):
