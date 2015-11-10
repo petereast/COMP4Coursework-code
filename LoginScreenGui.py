@@ -4,7 +4,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-class LoginWindow(QMainWindow):    
+class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         print("[INFO] Created Login window")
@@ -30,4 +30,4 @@ class LoginWindow(QMainWindow):
         self.layout.addWidget(self.help_button)
         #self.layout.addWidget()
 
-        self.setCentralLayout(self.layout)
+        self.setLayout(self.layout)
