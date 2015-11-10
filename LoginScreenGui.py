@@ -30,4 +30,4 @@ class LoginWindow:
         self.layout.addWidget(self.help_button)
         #self.layout.addWidget()
 
-        self.setLayout(self.layout)
+        self.setCentralLayout(self.layout)
