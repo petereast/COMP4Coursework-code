@@ -30,4 +30,7 @@ class LoginWindow(QMainWindow):
         self.layout.addWidget(self.help_button)
         #self.layout.addWidget()
 
-        self.setLayout(self.layout)
+        self.widget = QWidget()
+        self.widget.setLayout(self.layout)
+
+        self.setCentralWidget(self.widget)
