@@ -17,7 +17,7 @@ def main():
     login_window = LoginWindow()
 
     login_window.show()
-    login_window._raise_()
+    login_window.raise_()
     login_window.exec_()
 
 
