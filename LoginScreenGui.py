@@ -26,11 +26,17 @@ class LoginWindow(QMainWindow):
 
         self.username_item.setLayout(self.username_layout)
 
+
+        # Create a password feild
+
         self.password_item = QWidget()
 
         self.password_layout = QHBoxLayout()
         self.password_label = QLabel("Password:")
         self.password_input = QLineEdit()
+
+        self.password_layout.addWidget(self.password_label)
+        self.password_layout.addWidget(self.password_input)
 
         self.password_item.setLayout(self.password_layout)
 
@@ -41,7 +47,7 @@ class LoginWindow(QMainWindow):
 
         # TODO:
         # - include interactions with the user/pass entry
-        # - Make the title bigger/change the font
+        # - Make the title bigger/change the font?
         # - Anything else?
 
         self.layout = QVBoxLayout()
