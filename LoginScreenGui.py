@@ -22,11 +22,19 @@ class LoginWindow(QMainWindow):
         self.username_input = QLineEdit()
 
         self.username_layout.addWidget(self.username_label)
+        self.username_layout.addWidget(self.username_input)
 
         self.username_item.setLayout(self.username_layout)
 
+        self.password_item = QWidget()
 
+        self.password_layout = QHBoxLayout()
+        self.password_label = QLabel("Password:")
         self.password_input = QLineEdit()
+
+        self.password_item.setLayout(self.password_layout)
+
+
         self.submit_button = QPushButton("Login")
         self.help_button = QPushButton("?")
 
@@ -40,7 +48,7 @@ class LoginWindow(QMainWindow):
 
         self.layout.addWidget(self.main_title)
         self.layout.addWidget(self.username_item)
-        self.layout.addWidget(self.password_input)
+        self.layout.addWidget(self.password_item)
         self.layout.addWidget(self.submit_button)
         self.layout.addWidget(self.help_button)
         #self.layout.addWidget()
