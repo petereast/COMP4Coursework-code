@@ -18,8 +18,7 @@ def main():
 
     login_window.show()
     login_window.raise_()
-    login_window.exec_()
-
+    application.exec_()
     print("Execution complete")
 
 
