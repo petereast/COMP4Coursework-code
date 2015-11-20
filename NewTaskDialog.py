@@ -4,6 +4,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from GlobalResources import *
+from Tasks import *
 
 class NewTaskDialog(QDialog):
     def __init__(self):
@@ -28,9 +29,18 @@ class NewTaskDialog(QDialog):
         self.people_entry_label = QLabel("With whom:")
         self.main_layout.addWidget(self.people_entry_label)
 
-        self.people_entry = QLineEdit()
+        self.people_entry = QLineEdit("Type names")
         self.people_entry.textChanged.connect(self.check_names)
+        self.main_layout.addWidget(self.people_entry)
 
+        self.description_entry_label = QLabel("Description:")
+        self.main_layout.addWidget(self.description_entry_label)
+
+        self.description_entry = QLineEdit("Type words here")
+        self.main_layout.addWidget(self.description_entry)
+
+        self.submit_button = QPushButton("Submit")
+        self.main_layout.addWidget(self.submit_button)
 
         self.setLayout(self.main_layout)
 
@@ -48,4 +58,8 @@ class NewTaskDialog(QDialog):
 
     def check_names(self):
         # Add some name checking functionality
+        pass
+
+    def submit(self):
+        #prepare the database submission
         pass

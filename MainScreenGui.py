@@ -24,7 +24,7 @@ except ImportError:
 
 class MainScreen(QMainWindow):
     def __init__(self):
-        super(self).__init__()
+        super().__init__()
         print("[INFO] Created MainScreenGui")
 
         self.setWindowTitle("[CMS] Main View")
