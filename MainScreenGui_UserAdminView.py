@@ -1,7 +1,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-class MainScreenGuiUserAdminView(QWidget):
+class UserAdminView(QWidget):
     def __init__(self):
         super().__init__()
 

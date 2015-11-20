@@ -12,7 +12,7 @@ try:
     from MainScreenGui_TaskView import *
     from MainScreenGui_ResourcesView import *
     from MainScreenGui_UserAdminView import *
-except IOError:
+except ImportError:
     print("[ERROR] Error loading modules")
     sys.exit(-1)
 
@@ -28,7 +28,7 @@ class MainScreen(QMainWindow):
 
         self.setWindowTitle("[CMS] Main View")
 
-        self.main_layout
+        self.main_layout = QVBoxLayout()
 
         titlefont = QFont("Quicksand", 36)
         bodyfont = QFont("Quicksand", 12)
@@ -40,17 +40,48 @@ class MainScreen(QMainWindow):
         self.topbar_layout = QHBoxLayout()
 
         self.tb_help_button = QPushButton("?")
+        self.tb_help_button.setFixedWidth(30)
+
+        self.tb_spacer = QLabel("  ")
+        self.tb_spacer.setFixedWidth(600)
+
         self.tb_logout_button = QPushButton("Logout")
 
         self.topbar_layout.addWidget(self.tb_help_button)
+        self.topbar_layout.addWidget(self.tb_spacer)
         self.topbar_layout.addWidget(self.tb_logout_button)
 
         self.topbar.setLayout(self.topbar_layout)
 
+        self.main_layout.addWidget(self.topbar)
+
         # Finish defining the topbar
+
+
+        # Define the views for the view_switcher
+        # Diary View
+
+        diary_view = DiaryView()
+
+        # Task View
+        task_view = TaskView()
+
+        # Resources view
+        resources_view = ResourcesView()
+
 
         # Define the view switcher
 
-        # Fill in the window
+        self.view_switcher = QTabWidget()
+        self.view_switcher.addTab(diary_view, "Planner")
+        self.view_switcher.addTab(task_view, "Tasks")
+        self.view_switcher.addTab(resources_view, "Resources")
 
+        # End the definitions for the view swtich
+        # Add the task view to the window
+        self.main_layout.addWidget(self.view_switcher)
+
+
+        # Fill in the window
+        self.central_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.central_widget)
