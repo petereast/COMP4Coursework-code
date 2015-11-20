@@ -1,4 +1,4 @@
-
+import sys
 
 # import Qt depenencies
 from PyQt4.QtCore import *
@@ -9,14 +9,28 @@ class LoginWindow(QMainWindow):
         super().__init__()
         print("[INFO] Created Login window")
 
+        titlefont = QFont("Quicksand", 36)
+        bodyfont = QFont("Quicksand", 12)
+
+
+        self.setWindowTitle(" [CMS] Login")
+
         self.main_title = QLabel("Welcome.")
+
+
+        self.main_title.setFont(titlefont)
 
         # Create a labeled username feild:
 
         self.username_item = QWidget()
 
         self.username_layout = QHBoxLayout()
+
+
         self.username_label = QLabel("Username:")
+        self.username_label.setFont(bodyfont)
+        self.username_label.setFixedWidth(150)
+
         self.username_input = QLineEdit()
 
         self.username_layout.addWidget(self.username_label)
@@ -30,7 +44,11 @@ class LoginWindow(QMainWindow):
         self.password_item = QWidget()
 
         self.password_layout = QHBoxLayout()
+
         self.password_label = QLabel("Password:")
+        self.password_label.setFont(bodyfont)
+        self.password_label.setFixedWidth(150)
+
         self.password_input = QLineEdit()
 
         self.password_layout.addWidget(self.password_label)
@@ -38,11 +56,23 @@ class LoginWindow(QMainWindow):
 
         self.password_item.setLayout(self.password_layout)
 
+        self.button_layout = QHBoxLayout()
 
         self.submit_button = QPushButton("Login")
         self.help_button = QPushButton("?")
+        self.quit_button = QPushButton("Quit")
 
+        self.button_layout.addWidget(self.submit_button)
+        self.button_layout.addWidget(self.help_button)
+        self.button_layout.addWidget(self.quit_button)
 
+        # Add actions to the buttons within buttons_widget
+
+        self.quit_button.clicked.connect(lambda: sys.exit(1))
+
+        self.buttons_widget = QWidget()
+        self.buttons_widget.setFixedWidth(300)
+        self.buttons_widget.setLayout(self.button_layout)
         # TODO:
         # - include interactions with the user/pass entry
         # - Make the title bigger/change the font?
@@ -53,11 +83,11 @@ class LoginWindow(QMainWindow):
         self.layout.addWidget(self.main_title)
         self.layout.addWidget(self.username_item)
         self.layout.addWidget(self.password_item)
-        self.layout.addWidget(self.submit_button)
-        self.layout.addWidget(self.help_button)
+        self.layout.addWidget(self.buttons_widget)
         #self.layout.addWidget()
 
         self.widget = QWidget()
+        self.widget.setFixedWidth(600)
         self.widget.setLayout(self.layout)
 
         self.setCentralWidget(self.widget)
