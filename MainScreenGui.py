@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Peter East All Rights Reserved.
+
 import sys
 
 from PyQt4.QtCore import *
@@ -24,4 +26,18 @@ class MainScreenGui(QMainWindow):
         super().__init__()
         print("[INFO] Created MainScreenGui")
 
-        self.title = QLabel("Main Screen")
+
+        # Define the topbar
+        self.topbar = QWidget()
+
+        self.topbar_layout = QHBoxLayout()
+
+        self.tb_title = QLabel("Main Screen")
+        self.tb_help_button = QPushButton("?")
+        self.tb_logout_button = QPushButton("Logout")
+
+        self.topbar_layout.addWidget(self.tb_title)
+        self.topbar_layout.addWidget(self.tb_help_button)
+        self.topbar_layout.addWidget(self.tb_logout_button)
+
+        self.topbar.setLayout(self.topbar_layout)
