@@ -12,6 +12,7 @@ try:
     from MainScreenGui_TaskView import *
     from MainScreenGui_ResourcesView import *
     from MainScreenGui_UserAdminView import *
+    from GlobalResources import *
 except ImportError:
     print("[ERROR] Error loading modules")
     sys.exit(-1)
@@ -29,9 +30,6 @@ class MainScreen(QMainWindow):
         self.setWindowTitle("[CMS] Main View")
 
         self.main_layout = QVBoxLayout()
-
-        titlefont = QFont("Quicksand", 36)
-        bodyfont = QFont("Quicksand", 12)
 
         self.central_widget = QWidget()
         # Define the topbar
@@ -76,6 +74,8 @@ class MainScreen(QMainWindow):
         self.view_switcher.addTab(diary_view, "Planner")
         self.view_switcher.addTab(task_view, "Tasks")
         self.view_switcher.addTab(resources_view, "Resources")
+
+        self.view_switcher.setFont(GBodyFont)
 
         # End the definitions for the view swtich
         # Add the task view to the window
