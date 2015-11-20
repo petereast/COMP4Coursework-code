@@ -21,11 +21,6 @@ def main():
     login_window.show()
     login_window.raise_()
 
-
-    main_screen = MainScreen()
-    main_screen.show()
-    main_screen.raise_()
-
     application.exec_()
     print("Execution complete")
 

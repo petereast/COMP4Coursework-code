@@ -3,6 +3,8 @@ import sys
 # import Qt depenencies
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+
+from MainScreenGui import *
 from GlobalResources import *
 
 
@@ -57,6 +59,7 @@ class LoginWindow(QMainWindow):
         self.button_layout = QHBoxLayout()
 
         self.submit_button = QPushButton("Login")
+        self.submit_button.clicked.connect(self.login_action)
 
         self.help_button = QPushButton("?")
         self.help_button.setFixedWidth(30)
@@ -64,6 +67,7 @@ class LoginWindow(QMainWindow):
         self.quit_button = QPushButton("Quit")
 
         self.button_layout.addWidget(self.submit_button)
+
         self.button_layout.addWidget(self.help_button)
         self.button_layout.addWidget(self.quit_button)
 
@@ -92,3 +96,9 @@ class LoginWindow(QMainWindow):
         self.widget.setLayout(self.layout)
 
         self.setCentralWidget(self.widget)
+
+    def login_action(self):
+        self.main_screen = MainScreen()
+        self.main_screen.show()
+        self.main_screen.raise_()
+        self.hide()
