@@ -3,6 +3,8 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 
+from MeetingWidget import *
+
 class DiaryView(QWidget):
     def __init__(self):
         super().__init__()
@@ -16,5 +18,52 @@ class DiaryView(QWidget):
 
         self.main_layout.addWidget(self.title)
 
+        self.middle_widget = QWidget()
+        self.middle_layout = QHBoxLayout()
 
+        # Define the left-side stuff
+        self.left_side_widget = QWidget()
+        self.left_side_layout = QVBoxLayout()
+
+        self.meetings_container_widget = QScrollArea()
+
+        self.meetings_widget = QWidget()
+        self.meetings_layout = QVBoxLayout()
+
+
+        self.demo_meeting = MeetingOverview()
+        self.meetings_layout.addWidget(self.demo_meeting)
+        self.demo_meeting1 = MeetingOverview()
+        self.meetings_layout.addWidget(self.demo_meeting1)
+        self.demo_meeting2 = MeetingOverview()
+        self.meetings_layout.addWidget(self.demo_meeting2)
+        self.demo_meeting3 = MeetingOverview()
+        self.meetings_layout.addWidget(self.demo_meeting3)
+
+        self.meetings_widget.setLayout(self.meetings_layout)
+        self.meetings_container_widget.setWidget(self.meetings_widget)
+        self.meetings_container_widget.setVerticalScrollBarPolicy(2)
+        self.left_side_layout.addWidget(self.meetings_widget)
+
+        self.left_side_widget.setLayout(self.left_side_layout)
+        self.middle_layout.addWidget(self.left_side_widget)
+
+        # End of left side
+        # Define the right side stuff
+
+        self.right_side_widget = QWidget()
+        self.right_side_layout = QVBoxLayout()
+
+        self.add_new_appointment_button = QPushButton("New Appointment")
+        self.right_side_layout.addWidget(self.add_new_appointment_button)
+
+        self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
+        self.right_side_layout.addWidget(self.respond_to_pending_appointments_button)
+
+
+        self.right_side_widget.setLayout(self.right_side_layout)
+        self.middle_layout.addWidget(self.right_side_widget)
+
+        self.middle_widget.setLayout(self.middle_layout)
+        self.main_layout.addWidget(self.middle_widget)
         self.setLayout(self.main_layout)
