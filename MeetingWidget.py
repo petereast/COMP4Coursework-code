@@ -16,7 +16,7 @@ class MeetingOverview(QFrame):
 
         self.layout = QVBoxLayout()
 
-        self.setFrameStyle(QFrame.Raised)
+        self.setFrameStyle(QFrame.Panel)
 
         # Define the widgets
 
