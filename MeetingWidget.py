@@ -5,8 +5,13 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 
+#from Meetings import *
+
 class MeetingOverview(QFrame):
     def __init__(self, title="[Blank Meeting]", place="[Nowhere]", attendees=["[Demo Person 1]", "[Demo Person 2]"]):
+        """
+        Should take a Meeting object as a parameter rather than passing all of the individual parameters in.
+        """
         super().__init__()
 
         self.layout = QVBoxLayout()
@@ -33,6 +38,5 @@ class MeetingOverview(QFrame):
         self.edit_button = QPushButton("Edit")
         self.edit_button.setFixedWidth(150)
         self.layout.addWidget(self.edit_button)
-
-
         self.setLayout(self.layout)
+        self.setMinimumSize(400, 200)

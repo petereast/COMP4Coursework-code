@@ -70,6 +70,10 @@ class DiaryView(QWidget):
         self.button_container.setFixedHeight(90)
         self.right_side_layout.addWidget(self.button_container)
 
+        self.spacer1 = QLabel(" ")
+        self.spacer1.setFixedHeight(270)
+        self.right_side_layout.addWidget(self.spacer1)
+
 
         self.right_side_widget.setLayout(self.right_side_layout)
         self.middle_layout.addWidget(self.right_side_widget)
