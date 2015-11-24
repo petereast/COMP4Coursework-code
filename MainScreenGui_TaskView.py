@@ -56,6 +56,7 @@ class TaskView(QWidget):
         self.right_layout = QVBoxLayout()
 
         self.add_new_task_button = QPushButton("Add new Task")
+        self.add_new_task_button.setFixedWidth(150)
         self.add_new_task_button.clicked.connect(self.display_new_task_dialog)
         self.right_layout.addWidget(self.add_new_task_button)
 

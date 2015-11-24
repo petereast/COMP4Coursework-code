@@ -25,8 +25,6 @@ class DiaryView(QWidget):
         self.left_side_widget = QWidget()
         self.left_side_layout = QVBoxLayout()
 
-        self.meetings_container_widget = QScrollArea()
-
         self.meetings_widget = QWidget()
         self.meetings_layout = QVBoxLayout()
 
@@ -41,9 +39,13 @@ class DiaryView(QWidget):
         self.meetings_layout.addWidget(self.demo_meeting3)
 
         self.meetings_widget.setLayout(self.meetings_layout)
+        #self.meetings_widget.setMinimumSize(300, 700)
+
+
+        self.meetings_container_widget = QScrollArea()
         self.meetings_container_widget.setWidget(self.meetings_widget)
         self.meetings_container_widget.setVerticalScrollBarPolicy(2)
-        self.left_side_layout.addWidget(self.meetings_widget)
+        self.left_side_layout.addWidget(self.meetings_container_widget)
 
         self.left_side_widget.setLayout(self.left_side_layout)
         self.middle_layout.addWidget(self.left_side_widget)
@@ -52,13 +54,21 @@ class DiaryView(QWidget):
         # Define the right side stuff
 
         self.right_side_widget = QWidget()
-        self.right_side_layout = QVBoxLayout()
+        self.right_side_layout = QVBoxLayout()#
+
+        # Right side widgets...
+        self.button_container = QWidget()
+        self.button_container_layout = QVBoxLayout()
 
         self.add_new_appointment_button = QPushButton("New Appointment")
-        self.right_side_layout.addWidget(self.add_new_appointment_button)
+        self.button_container_layout.addWidget(self.add_new_appointment_button)
 
         self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
-        self.right_side_layout.addWidget(self.respond_to_pending_appointments_button)
+        self.button_container_layout.addWidget(self.respond_to_pending_appointments_button)
+
+        self.button_container.setLayout(self.button_container_layout)
+        self.button_container.setFixedHeight(90)
+        self.right_side_layout.addWidget(self.button_container)
 
 
         self.right_side_widget.setLayout(self.right_side_layout)

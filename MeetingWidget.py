@@ -12,7 +12,6 @@ class MeetingOverview(QFrame):
         self.layout = QVBoxLayout()
 
         self.setFrameStyle(QFrame.Raised)
-        self.setMinimumHeight(200)
 
         # Define the widgets
 
@@ -30,8 +29,9 @@ class MeetingOverview(QFrame):
         for index, person in enumerate(attendees):
             self.attendees_title.setText(self.attendees_title.text()+"\n"+person)
 
-
+        #self.setMinimumHeight(100)
         self.edit_button = QPushButton("Edit")
+        self.edit_button.setFixedWidth(150)
         self.layout.addWidget(self.edit_button)
 
 
