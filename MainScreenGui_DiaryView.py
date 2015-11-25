@@ -67,6 +67,8 @@ class DiaryView(QWidget):
         self.add_new_appointment_button.clicked.connect(self.display_new_meeting_dialog)
         self.button_container_layout.addWidget(self.add_new_appointment_button)
 
+        # TODO: Add some kind of indicator to show the amound of unread pending meetings
+
         self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
         self.respond_to_pending_appointments_button.clicked.connect(self.display_respond_to_meetings_dialog)
         self.button_container_layout.addWidget(self.respond_to_pending_appointments_button)
