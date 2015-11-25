@@ -48,8 +48,11 @@ class RespondToPendingMeetingDialog(QDialog):
         self.right_pane = QWidget()
         self.right_pane_layout = QVBoxLayout()
 
+        self.meeting_view = PendingMeetingOverview(Meeting())
+        self.right_pane_layout.addWidget(self.meeting_view)
 
 
+        self.right_pane.setLayout(self.right_pane_layout)
         self.pane_container_layout.addWidget(self.left_pane)
         self.pane_container_layout.addWidget(self.right_pane)
         self.pane_container.setLayout(self.pane_container_layout)

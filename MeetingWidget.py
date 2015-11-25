@@ -16,7 +16,7 @@ class MeetingOverview(QFrame):
 
         self.layout = QVBoxLayout()
 
-        self.setFrameStyle(QFrame.Panel + QFrame.Sunken)
+        self.setFrameStyle(QFrame.StyledPanel + QFrame.Sunken)
 
         # Define the widgets
 
@@ -40,3 +40,14 @@ class MeetingOverview(QFrame):
         self.layout.addWidget(self.edit_button)
         self.setLayout(self.layout)
         self.setMinimumSize(400, 200)
+
+
+class PendingMeetingOverview(MeetingOverview):
+    def __init__(self, meeting):
+        super().__init__(meeting)
+
+        self.edit_button.setText("Respond - Confirm")
+
+        self.deny_button = QPushButton("Respond - Deny")
+        self.deny_button.setFixedWidth(150)
+        self.layout.addWidget(self.deny_button)
