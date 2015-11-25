@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from GlobalResources import *
 
 from MeetingWidget import *
+from NewMeetingDialog import *
 
 class DiaryView(QWidget):
     def __init__(self):
@@ -61,6 +62,7 @@ class DiaryView(QWidget):
         self.button_container_layout = QVBoxLayout()
 
         self.add_new_appointment_button = QPushButton("New Appointment")
+        self.add_new_appointment_button.clicked.connect(self.display_new_meeting_dialog)
         self.button_container_layout.addWidget(self.add_new_appointment_button)
 
         self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
@@ -81,3 +83,7 @@ class DiaryView(QWidget):
         self.middle_widget.setLayout(self.middle_layout)
         self.main_layout.addWidget(self.middle_widget)
         self.setLayout(self.main_layout)
+
+    def display_new_meeting_dialog(self):
+        new_meeting_dialog = NewMeetingDialog()
+        new_meeting_dialog.exec_()
