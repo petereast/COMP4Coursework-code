@@ -34,7 +34,7 @@ class TaskView(QWidget):
         data = QStandardItemModel()
 
         # This will be fetched from a database using different code in another class
-        exampleItems = [Task("Hello world", "Testing 123", 2)]
+        exampleItems = [Task("Hello world", "Testing 123", 2), Task("Hello again world :)","This is a demo", 2)]
 
         for item in exampleItems:
             tmp = QStandardItem(item.text)

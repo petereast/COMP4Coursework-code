@@ -5,6 +5,8 @@ from GlobalResources import *
 
 from MeetingWidget import *
 from NewMeetingDialog import *
+from Meetings import Meeting
+from RespondToPendingRequestsDialog import *
 
 class DiaryView(QWidget):
     def __init__(self):
@@ -30,13 +32,13 @@ class DiaryView(QWidget):
         self.meetings_layout = QVBoxLayout()
 
 
-        self.demo_meeting = MeetingOverview()
+        self.demo_meeting = MeetingOverview(Meeting())
         self.meetings_layout.addWidget(self.demo_meeting)
-        self.demo_meeting1 = MeetingOverview()
+        self.demo_meeting1 = MeetingOverview(Meeting())
         self.meetings_layout.addWidget(self.demo_meeting1)
-        self.demo_meeting2 = MeetingOverview()
+        self.demo_meeting2 = MeetingOverview(Meeting())
         self.meetings_layout.addWidget(self.demo_meeting2)
-        self.demo_meeting3 = MeetingOverview()
+        self.demo_meeting3 = MeetingOverview(Meeting())
         self.meetings_layout.addWidget(self.demo_meeting3)
 
         self.meetings_widget.setLayout(self.meetings_layout)
@@ -66,6 +68,7 @@ class DiaryView(QWidget):
         self.button_container_layout.addWidget(self.add_new_appointment_button)
 
         self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
+        self.respond_to_pending_appointments_button.clicked.connect(self.display_respond_to_meetings_dialog)
         self.button_container_layout.addWidget(self.respond_to_pending_appointments_button)
 
         self.button_container.setLayout(self.button_container_layout)
@@ -87,3 +90,7 @@ class DiaryView(QWidget):
     def display_new_meeting_dialog(self):
         new_meeting_dialog = NewMeetingDialog()
         new_meeting_dialog.exec_()
+
+    def display_respond_to_meetings_dialog(self):
+        respond_to_meetings_dialog = RespondToPendingMeetingDialog()
+        respond_to_meetings_dialog.exec_()

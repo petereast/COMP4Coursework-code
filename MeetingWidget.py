@@ -4,11 +4,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from GlobalResources import *
-
+from Meetings import Meeting
 #from Meetings import *
 
 class MeetingOverview(QFrame):
-    def __init__(self, title="[Blank Meeting]", place="[Nowhere]", attendees=["[Demo Person 1]", "[Demo Person 2]"]):
+    def __init__(self, meeting):
         """
         Should take a Meeting object as a parameter rather than passing all of the individual parameters in.
         """
@@ -16,22 +16,22 @@ class MeetingOverview(QFrame):
 
         self.layout = QVBoxLayout()
 
-        self.setFrameStyle(QFrame.Panel)
+        self.setFrameStyle(QFrame.Panel + QFrame.Sunken)
 
         # Define the widgets
 
-        self.title = QLabel(title)
+        self.title = QLabel(meeting.title)
         self.title.setFont(GTitleFont)
         self.layout.addWidget(self.title)
 
-        self.place_title = QLabel("At: "+place)
+        self.place_title = QLabel("At: "+meeting.place)
         self.layout.addWidget(self.place_title)
 
         self.attendees_title = QLabel("Attendees:")
         self.layout.addWidget(self.attendees_title)
 
         self.attendees_list = []
-        for index, person in enumerate(attendees):
+        for index, person in enumerate(meeting.attendees):
             self.attendees_title.setText(self.attendees_title.text()+"\n"+person)
 
         #self.setMinimumHeight(100)
