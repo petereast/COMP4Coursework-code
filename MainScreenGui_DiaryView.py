@@ -7,6 +7,7 @@ from MeetingWidget import *
 from NewMeetingDialog import *
 from Meetings import Meeting
 from RespondToPendingRequestsDialog import *
+from IndicatorBadge import *
 
 class DiaryView(QWidget):
     def __init__(self):
@@ -69,9 +70,19 @@ class DiaryView(QWidget):
 
         # TODO: Add some kind of indicator to show the amound of unread pending meetings
 
+        self.response_container = QWidget()
+        self.response_layout = QHBoxLayout()
+
         self.respond_to_pending_appointments_button = QPushButton("Respond to Pending Appointments")
         self.respond_to_pending_appointments_button.clicked.connect(self.display_respond_to_meetings_dialog)
-        self.button_container_layout.addWidget(self.respond_to_pending_appointments_button)
+        self.respond_to_pending_appointments_button.setFixedHeight(30)
+        self.response_layout.addWidget(self.respond_to_pending_appointments_button)
+
+        self.pending_number = Indicator(34)
+        self.response_layout.addWidget(self.pending_number)
+
+        self.response_container.setLayout(self.response_layout)
+        self.button_container_layout.addWidget(self.response_container)
 
         self.button_container.setLayout(self.button_container_layout)
         self.button_container.setFixedHeight(90)

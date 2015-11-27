@@ -7,6 +7,7 @@ from GlobalResources import *
 from Meetings import Meeting
 from MeetingWidget import *
 
+
 class RespondToPendingMeetingDialog(QDialog):
     def __init__(self):
         super().__init__()
