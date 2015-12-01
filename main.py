@@ -8,11 +8,12 @@ from PyQt4.QtGui import *
 
 # import custom classes
 from LoginScreenGui import LoginWindow
-from MainScreenGui import MainScreen
 
 # Main Program
 
 def main():
+
+    print("[INFO] Startup")
 
     application = QApplication(sys.argv)
     login_window = LoginWindow()
@@ -22,7 +23,9 @@ def main():
     login_window.raise_()
 
     application.exec_()
-    print("Execution complete")
+
+
+    print("[INFO] Execution complete")
 
 
 if __name__ == "__main__":

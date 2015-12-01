@@ -21,7 +21,7 @@ class Indicator(QFrame):
         #self.setFixedWidth(30)
         self.colour = QColor(255, 61, 0)
 
-        self.setStyleSheet("QFrame {background-color: %s;  border-radius: 15;}" % self.colour.name())
+        self.setStyleSheet("QFrame {background-color: %s;  border-radius: 15; background-clip: margin;}" % self.colour.name())
 
         self.text_colour = QColor(0xFF, 0xFF, 0xFF)
 

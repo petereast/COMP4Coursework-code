@@ -11,7 +11,10 @@ class Database:
 
         self.db_name = database_name
 
-    def _connect_and_execute(self, sql="", database_name=self.db_name):
+    def _connect_and_execute(self, sql="", database_name=None):
+        if database_name == None:
+            database_name = self.db_name
+
         with sqlite3.connect(database_name) as dbcon:
             cursor = dbcon.cursor()
             cursor.execute(sql)
@@ -31,4 +34,14 @@ class UsersInfo(Database):
         #Values as SQL string? TODO: reqrite this bit when a definite list of attributes is determined
         self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 
-main()
+    # TODO: Add more features as they become necessary.
+
+class TasksInfo(Database):
+
+    def __init__(self):
+        super().__init__(self, "Tasks")
+
+
+class MeetingsInfo(Database):
+    def __init__(self):
+        super().__init__(self, "Meetings")

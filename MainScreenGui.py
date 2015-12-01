@@ -44,6 +44,7 @@ class MainScreen(QMainWindow):
         self.tb_spacer.setFixedWidth(600)
 
         self.tb_logout_button = QPushButton("Logout")
+        self.tb_logout_button.setFixedWidth(100)
 
         self.topbar_layout.addWidget(self.tb_help_button)
         self.topbar_layout.addWidget(self.tb_spacer)
