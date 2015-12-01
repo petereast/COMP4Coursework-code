@@ -10,3 +10,6 @@ class Meeting:
         self.place = place
         self.attendees = attendees
         self.when = when
+
+    def load_meeting_from_database(self):
+        #provide functionality to get an individual meeting from a database.
