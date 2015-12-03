@@ -28,11 +28,11 @@ class UsersInfo(Database):
     # NB: all input MUST be sanitized at this point.
 
     def get_all_users(self, condition = ""): #Add a SQL condition? maybe? TODO: refactor this bit
-        self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
+        return self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
 
     def add_user(self, values):
         #Values as SQL string? TODO: reqrite this bit when a definite list of attributes is determined
-        self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
+        return self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 
     # TODO: Add more features as they become necessary.
 
