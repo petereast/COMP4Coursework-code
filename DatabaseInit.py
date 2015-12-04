@@ -24,8 +24,11 @@ class Database:
 class UsersInfo(Database):
     def __init__(self):
         super().__init__(self, "Users")
+        self.create_table()
 
     # NB: all input MUST be sanitized at this point.
+    def create_table(self):
+        self._connect_and_execute(SqlDictionary.CREATE_USERS)
 
     def get_all_users(self, condition = ""): #Add a SQL condition? maybe? TODO: refactor this bit
         return self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
@@ -41,7 +44,13 @@ class TasksInfo(Database):
     def __init__(self):
         super().__init__(self, "Tasks")
 
+    def create_table(self):
+        self._connect_and_execute(SqlDictionary.CREATE_TASKS)
+
 
 class MeetingsInfo(Database):
     def __init__(self):
         super().__init__(self, "Meetings")
+
+    def create_table(self):
+        self._connect_and_execute(SqlDictionary.CREATE_MEETINGS)
