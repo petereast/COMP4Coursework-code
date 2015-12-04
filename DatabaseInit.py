@@ -43,6 +43,7 @@ class TasksInfo(Database):
 
     def __init__(self):
         super().__init__(self, "Tasks")
+        self.create_table()
 
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_TASKS)
@@ -51,6 +52,7 @@ class TasksInfo(Database):
 class MeetingsInfo(Database):
     def __init__(self):
         super().__init__(self, "Meetings")
+        self.create_table()
 
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS)

@@ -4,29 +4,40 @@
 
 #initialisation scripts
 
-CREATE_USERS = """CREATE TABLE Users IF NOT EXISTS
-                (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-
-
-
+CREATE_USERS = """CREATE TABLE IF NOT EXISTS Users
+                (UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Name TEXT,
+                Username TEXT,
+                Password TEXT,
+                Permissions INTEGER # A 5-bit permisions string
                 );
-
 """
+
+#Permissions: Like unix file permissions but using denary instead of octal
+# and there are 5 bits rather than several.
 
 # time to design databases - NOW!
 
-CREATE_TASKS = """CREATE TABLE Tasks IF NOT EXISTS
-                (TaskID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-
-
-
+CREATE_TASKS = """CREATE TABLE IF NOT EXISTS Tasks
+                (TaskID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Title TEXT,
+                Description TEXT,
+                Owner INTEGER, # Foreign Key to form a one to many with `users`
+                Attendees INTEGER # Foreign Key to form a many to many with Users
                 );
+
+                CREATE TABLE IF NOT EXISTS TaskAttendee
+                (
+                    #HOW DO I COMPOSITE KEYY???
+                )
 """
 
-CREATE_RESOURCES = """CREATE TABLE Resources IF NOT EXISTS
-                (ResourceID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-
-
+CREATE_RESOURCES = """CREATE TABLE IF NOT EXISTS Resources
+                (ResourceID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Name TEXT,
+                Cost INTEGER,
+                QuantityAvailable INTEGER,
+                QuantityRequired INTEGER
 );
 """
 
