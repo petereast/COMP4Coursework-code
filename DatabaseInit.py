@@ -68,3 +68,6 @@ class MeetingsInfo(Database):
             self.meeting_info["Location"],
             self.meeting_info["Attendees"])
         self._connect_and_execute(SqlDictionary.ADD_MEETING.format(SQL_DATA)) #TODO Sort out the formatting.
+
+    def get_meeting_info(self):
+        SQL
