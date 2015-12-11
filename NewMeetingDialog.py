@@ -5,6 +5,8 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 
+from DatabaseInit import MeetingsInfo
+
 class NewMeetingDialog(QDialog):
     def __init__(self):
         super().__init__()
@@ -33,10 +35,16 @@ class NewMeetingDialog(QDialog):
         self.where_entry = QLineEdit()
         self.main_layout.addWidget(self.where_entry)
 
+        self.when_label = QLabel("When")
+        self.main_layout.addWidget(self.when_label)
+        self.when_entry = QLineEdit()
+        self.main_layout.addWidget(self.when_entry)
+
         self.button_container_widget = QWidget()
         self.button_container_layout = QHBoxLayout()
 
         self.save_button = QPushButton("Save")
+        self.save_button.clicked.connect(self.add_meeting)
         self.button_container_layout.addWidget(self.save_button)
         self.cancel_button = QPushButton("Cancel")
         self.cancel_button.clicked.connect(self.close)
@@ -46,3 +54,14 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.button_container_widget)
 
         self.setLayout(self.main_layout)
+
+    def add_meeting(self):
+        info = {"OwnerID": 0, # This is where to do the username lookup
+            "Title":self.meeting_title_entry.text(),
+            "ISOTime":self.when_entry.text(),
+            "Location":self.where_entry.text(),
+            "Attendees": 0 # This will work someday
+        }
+        meeting = MeetingsInfo(info)
+        meeting.add_meeting()
+        self.close()

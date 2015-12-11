@@ -1,12 +1,13 @@
 # DatabaseInit
 # main program
 
-import SqlDictionary #this tidies all the SQL queries into another namespace
+import SqlDictionary
+ #this tidies all the SQL queries into another namespace
 import sqlite3
 
 class Database:
     """This is the general database wrapper that I'll use throughout the system"""
-    def __init__(self, database_name):
+    def __init__(self, child, database_name="cmsdb.db"):
         print("[INFO] Created database")
 
         self.db_name = database_name
@@ -15,7 +16,8 @@ class Database:
         if database_name == None:
             database_name = self.db_name
 
-        with sqlite3.connect(database_name) as dbcon:
+        print(self.db_name)
+        with sqlite3.connect(self.db_name) as dbcon:
             cursor = dbcon.cursor()
             cursor.execute(sql)
             results = cursor.fetchall()
@@ -23,7 +25,7 @@ class Database:
 
 class UsersInfo(Database):
     def __init__(self):
-        super().__init__(self, "Users")
+        super().__init__(self)
         self.create_table()
 
     # NB: all input MUST be sanitized at this point.
@@ -50,9 +52,19 @@ class TasksInfo(Database):
 
 
 class MeetingsInfo(Database):
-    def __init__(self):
-        super().__init__(self, "Meetings")
+    def __init__(self, meeting_info):
+        super().__init__(self)
         self.create_table()
+        self.meeting_info = meeting_info
 
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS)
+        self._connect_and_execute(SqlDictionary.CREATE_MEETINGS_ATTENEDEES)
+
+    def add_meeting(self):
+        SQL_DATA = "{0}, '{1}', '{2}', '{3}', '{4}'".format(self.meeting_info["OwnerID"],
+            self.meeting_info["Title"],
+            self.meeting_info["ISOTime"],
+            self.meeting_info["Location"],
+            self.meeting_info["Attendees"])
+        self._connect_and_execute(SqlDictionary.ADD_MEETING.format(SQL_DATA)) #TODO Sort out the formatting.

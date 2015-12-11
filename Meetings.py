@@ -14,4 +14,5 @@ class Meeting:
 
     def load_meeting_from_database(self):
         #provide functionality to get an individual meeting from a database.
+
         pass

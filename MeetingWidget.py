@@ -41,7 +41,6 @@ class MeetingOverview(QFrame):
         self.setLayout(self.layout)
         self.setMinimumSize(400, 200)
 
-
 class PendingMeetingOverview(MeetingOverview):
     def __init__(self, meeting):
         super().__init__(meeting)

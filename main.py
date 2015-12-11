@@ -8,12 +8,16 @@ from PyQt4.QtGui import *
 
 # import custom classes
 from LoginScreenGui import LoginWindow
+from DatabaseInit import UsersInfo
 
 # Main Program
 
 def main():
 
     print("[INFO] Startup")
+
+    print("[INFO] Initiate UsersInfo database table")
+    u = UsersInfo()
 
     application = QApplication(sys.argv)
     login_window = LoginWindow()

@@ -9,12 +9,13 @@ CREATE_USERS = """CREATE TABLE IF NOT EXISTS Users
                 Name TEXT,
                 Username TEXT,
                 Password TEXT,
-                Permissions INTEGER # A 5-bit permisions string
+                Permissions INTEGER
                 );
 """
 
 #Permissions: Like unix file permissions but using denary instead of octal
 # and there are 5 bits rather than several.
+# eg 0b11010 - will give the user permission to use the meetings, tasks and user admin, and not resources management or privac.
 
 # time to design databases - NOW!
 
@@ -24,27 +25,29 @@ CREATE_MEETINGS = """CREATE TABLE IF NOT EXISTS Meetings
                 Title TEXT,
                 ISOTime TEXT,
                 Location TEXT,
-                Confirmed BOOLEAN,
-                Attendees INTEGER # Foreign Key -- see table -
-                );
-
-                CREATE TABLE IF NOT EXISTS MeetingAttendee
-                (
-                    #I NEED ANOTHER COMPOSITE KEEY!!
+                Attendees INTEGER
                 );
 """
+
+CREATE_MEETINGS_ATTENEDEES = """CREATE TABLE IF NOT EXISTS MeetingAttendee
+(
+    MeetingID INTEGER,
+    UserID INTEGER,
+    Confirmed BOOLEAN
+);"""
 
 CREATE_TASKS = """CREATE TABLE IF NOT EXISTS Tasks
                 (TaskID INTEGER PRIMARY KEY AUTOINCREMENT,
                 Title TEXT,
                 Description TEXT,
-                Owner INTEGER, # Foreign Key to form a one to many with `users`
-                Attendees INTEGER # Foreign Key to form a many to many with Users
+                Owner INTEGER,
+                Attendees INTEGER
                 );
 
                 CREATE TABLE IF NOT EXISTS TaskAttendee
                 (
-                    #HOW DO I COMPOSITE KEYY???
+                TaskId INTEGER,
+                UserId INTEGER
                 );
 """
 
@@ -61,4 +64,6 @@ CREATE_RESOURCES = """CREATE TABLE IF NOT EXISTS Resources
 GET_ALL_USERS = """ SELECT * FROM Users {0}; """
 
 ADD_USER = """INSERT INTO Users(Name, Username, Password, Permissions) VALUES({0});"""
-"
+
+
+ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location, Attendees) VALUES({0})"""
