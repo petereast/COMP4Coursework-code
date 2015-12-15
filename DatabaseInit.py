@@ -38,8 +38,7 @@ class UsersInfo(Database):
 
     def add_user(self, info):
         #info follows the format {"SQL value":Data value}
-        values = "{0}, {1}, {2}, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
-
+        values = "`{0}`, `{1}`, `{2}`, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
 
         return self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 

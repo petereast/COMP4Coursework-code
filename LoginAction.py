@@ -4,8 +4,9 @@
 import hashlib
 
 from DatabaseInit import *
+import SqlDictionary
 
-class user:
+class User:
     def __init__():
         self.info = {} # info to be retrieved from the database
 
@@ -23,4 +24,8 @@ class user:
             info = self.info
 
     dbinterface = UsersInfo()
-    db
+    dbinterface.add_user(info)
+
+class UserSession(User):
+    def __init__(self):
+        print("[USER] [INFO] Session start")
