@@ -32,14 +32,26 @@ class DiaryView(QWidget):
         self.meetings_widget = QWidget()
         self.meetings_layout = QVBoxLayout()
 
+        # Start to do a slightly more indepth meetings code
+        # Get meetings from the database
+        # Enumerate these meetings
+        # have an array of meetingss objects
 
-        self.demo_meeting = MeetingOverview(Meeting())
+        meetings_list = []
+
+        meetings_widgets = []
+        for m in meetings_list:
+            pass
+
+
+
+        self.demo_meeting = MeetingOverview(Meeting(meeting_id=1))
         self.meetings_layout.addWidget(self.demo_meeting)
-        self.demo_meeting1 = MeetingOverview(Meeting())
+        self.demo_meeting1 = MeetingOverview(Meeting(meeting_id=2))
         self.meetings_layout.addWidget(self.demo_meeting1)
-        self.demo_meeting2 = MeetingOverview(Meeting())
+        self.demo_meeting2 = MeetingOverview(Meeting(meeting_id=1))
         self.meetings_layout.addWidget(self.demo_meeting2)
-        self.demo_meeting3 = MeetingOverview(Meeting())
+        self.demo_meeting3 = MeetingOverview(Meeting(meeting_id=2))
         self.meetings_layout.addWidget(self.demo_meeting3)
 
         self.meetings_widget.setLayout(self.meetings_layout)

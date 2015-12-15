@@ -8,7 +8,7 @@ import sqlite3
 class Database:
     """This is the general database wrapper that I'll use throughout the system"""
     def __init__(self, child, database_name="cmsdb.db"):
-        print("[INFO] Created database")
+        print("[INFO] Created database object")
 
         self.db_name = database_name
 
@@ -16,11 +16,12 @@ class Database:
         if database_name == None:
             database_name = self.db_name
 
-        print(self.db_name)
         with sqlite3.connect(self.db_name) as dbcon:
             cursor = dbcon.cursor()
             cursor.execute(sql)
             results = cursor.fetchall()
+
+        print("[INFO] Executed SQL query \"{0}\"".format(sql))
         return results
 
 class UsersInfo(Database):
@@ -32,11 +33,14 @@ class UsersInfo(Database):
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_USERS)
 
-    def get_all_users(self, condition = ""): #Add a SQL condition? maybe? TODO: refactor this bit
+    def get_all_users(self, condition = ""): # Add a SQL condition? maybe? TODO: refactor this bit
         return self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
 
-    def add_user(self, values):
-        #Values as SQL string? TODO: reqrite this bit when a definite list of attributes is determined
+    def add_user(self, info):
+        #info follows the format {"SQL value":Data value}
+        values = "{0}, {1}, {2}, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
+
+
         return self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 
     # TODO: Add more features as they become necessary.
@@ -70,4 +74,13 @@ class MeetingsInfo(Database):
         self._connect_and_execute(SqlDictionary.ADD_MEETING.format(SQL_DATA)) #TODO Sort out the formatting.
 
     def get_meeting_info(self):
-        SQL
+        sql_condition = "WHERE (MeetingID = {0})".format(self.meeting_info['MeetingID'])
+        q = SqlDictionary.GET_MEETING.format(sql_condition)
+        results = self._connect_and_execute(q)
+        return results[0]
+
+
+    def get_meetings_by_owner(self, OwnerID):
+        sql_condition = "WHERE (OwnerID = {0})".format(OwnerID)
+        q = SqlDictionary.GET_MEETING_ID_LIST.format(sql_condition)
+        return self._connect_and_execute(q)

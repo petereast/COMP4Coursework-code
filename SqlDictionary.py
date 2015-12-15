@@ -24,8 +24,7 @@ CREATE_MEETINGS = """CREATE TABLE IF NOT EXISTS Meetings
                 OwnerID INTEGER,
                 Title TEXT,
                 ISOTime TEXT,
-                Location TEXT,
-                Attendees INTEGER
+                Location TEXT
                 );
 """
 
@@ -67,3 +66,7 @@ ADD_USER = """INSERT INTO Users(Name, Username, Password, Permissions) VALUES({0
 
 
 ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location, Attendees) VALUES({0})"""
+
+GET_MEETING = """SELECT * FROM Meetings {0};"""
+
+GET_MEETING_ID_LIST = """SELECT MeetingID FROM Meetings {0};"""

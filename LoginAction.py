@@ -1,0 +1,26 @@
+#Login action:
+#   The code and database actions performed when the user attempts to log into the system.
+
+import hashlib
+
+from DatabaseInit import *
+
+class user:
+    def __init__():
+        self.info = {} # info to be retrieved from the database
+
+    def _password_hash_cmp(self, password_input):
+        currenthash = self.info["Password"]
+
+        phash = hashlib.md5()
+        phash.update(bytes(password_input, "UTF-8"))
+
+        return currenthash == phash.hexdigest()
+
+    def add_user(self, info=None):
+
+        if info == None:
+            info = self.info
+
+    dbinterface = UsersInfo()
+    db
