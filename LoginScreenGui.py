@@ -7,13 +7,14 @@ from PyQt4.QtGui import *
 from MainScreenGui import *
 from GlobalResources import *
 
+from LoginAction import *
 
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         print("[INFO] Created Login window")
 
-        self.setWindowTitle(" [CMS] Login")
+        self.setWindowTitle("[CMS] Login")
 
         self.main_title = QLabel("Welcome.")
 

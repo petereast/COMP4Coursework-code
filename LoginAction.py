@@ -7,8 +7,9 @@ from DatabaseInit import *
 import SqlDictionary
 
 class User:
-    def __init__():
+    def __init__(seld, uid=0):
         self.info = {} # info to be retrieved from the database
+        self.user_id = uid
 
     def _password_hash_cmp(self, password_input):
         currenthash = self.info["Password"]
@@ -23,8 +24,10 @@ class User:
         if info == None:
             info = self.info
 
-    dbinterface = UsersInfo()
-    dbinterface.add_user(info)
+        dbinterface = UsersInfo()
+        dbinterface.add_user(info)
+
+    def update_user_info(self):
 
 class UserSession(User):
     def __init__(self):
