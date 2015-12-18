@@ -36,6 +36,9 @@ class UsersInfo(Database):
     def get_all_users(self, condition = ""): # Add a SQL condition? maybe? TODO: refactor this bit
         return self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
 
+    def get_uid_by_username(self, username=""):
+        return self._connect_and_execute((SqlDictionary.GET_USER_ID.format(username)))[0][0]
+
     def add_user(self, info):
         #info follows the format {"SQL value":Data value}
         values = "`{0}`, `{1}`, `{2}`, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])

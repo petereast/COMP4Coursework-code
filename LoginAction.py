@@ -7,7 +7,7 @@ from DatabaseInit import *
 import SqlDictionary
 
 class User:
-    def __init__(seld, uid=0):
+    def __init__(self, uid=0):
         self.info = {} # info to be retrieved from the database
         self.user_id = uid
 
@@ -28,6 +28,7 @@ class User:
         dbinterface.add_user(info)
 
     def update_user_info(self):
+        pass
 
 class UserSession(User):
     def __init__(self):

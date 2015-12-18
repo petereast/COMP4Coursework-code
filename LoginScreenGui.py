@@ -8,6 +8,7 @@ from MainScreenGui import *
 from GlobalResources import *
 
 from LoginAction import *
+from DatabaseInit import *
 
 class LoginWindow(QMainWindow):
     def __init__(self):
@@ -99,6 +100,13 @@ class LoginWindow(QMainWindow):
         self.setCentralWidget(self.widget)
 
     def login_action(self):
+
+        userid = UsersInfo().get_uid_by_username(self.username_input.text())
+        print(userid)
+
+        user = User(userid)
+
+
         self.main_screen = MainScreen()
         self.main_screen.show()
         self.main_screen.raise_()

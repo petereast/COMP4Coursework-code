@@ -61,6 +61,8 @@ CREATE_RESOURCES = """CREATE TABLE IF NOT EXISTS Resources
 
 GET_ALL_USERS = """ SELECT * FROM Users {0}; """
 
+GET_USER_ID = """ SELECT UserID FROM Users WHERE (Username = '{0}');"""
+
 ADD_USER = """INSERT INTO Users(Name, Username, Password, Permissions) VALUES({0});"""
 
 
