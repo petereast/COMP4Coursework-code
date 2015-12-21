@@ -11,7 +11,12 @@ class User:
         self.info = {} # info to be retrieved from the database
         self.user_id = uid
 
-    def _password_hash_cmp(self, password_input):
+        self.dbinterface = UsersInfo()
+
+        self.update_user_info()
+        print(self.user_id)
+
+    def password_hash_cmp(self, password_input):
         currenthash = self.info["Password"]
 
         phash = hashlib.md5()
@@ -28,7 +33,15 @@ class User:
         dbinterface.add_user(info)
 
     def update_user_info(self):
-        pass
+        raw_info = self.dbinterface.get_all_users("WHERE(UserID = {0})".format(self.user_id))[0]
+        print(raw_info)
+        self.info["UserID"] =  self.user_id
+        self.info["Name"] = raw_info[1]
+        self.info["Username"] = raw_info[2]
+        self.info["Password"] =  raw_info[3]
+        self.info["Permissions"] = raw_info[4]
+
+        print(self.info)
 
 class UserSession(User):
     def __init__(self):

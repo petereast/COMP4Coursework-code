@@ -52,6 +52,7 @@ class LoginWindow(QMainWindow):
         self.password_label.setFixedWidth(150)
 
         self.password_input = QLineEdit()
+        self.password_input.setEchoMode(QLineEdit.Password)
 
         self.password_layout.addWidget(self.password_label)
         self.password_layout.addWidget(self.password_input)
@@ -105,6 +106,9 @@ class LoginWindow(QMainWindow):
         print(userid)
 
         user = User(userid)
+
+        if user.password_hash_cmp(self.password_input.text()):
+            pass
 
 
         self.main_screen = MainScreen()

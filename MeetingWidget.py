@@ -35,9 +35,15 @@ class MeetingOverview(QFrame):
             self.attendees_title.setText(self.attendees_title.text()+"\n"+person)
 
         #self.setMinimumHeight(100)
+        self.buttons_widget = QWidget()
+        self.buttons_layout = QHBoxLayout()
+
         self.edit_button = QPushButton("Edit")
         self.edit_button.setFixedWidth(150)
-        self.layout.addWidget(self.edit_button)
+        self.buttons_layout.addWidget(self.edit_button)
+
+        self.buttons_widget.setLayout(self.buttons_layout)
+        self.layout.addWidget(self.buttons_widget)
         self.setLayout(self.layout)
         self.setMinimumSize(400, 200)
 
@@ -49,4 +55,4 @@ class PendingMeetingOverview(MeetingOverview):
 
         self.deny_button = QPushButton("Respond - Deny")
         self.deny_button.setFixedWidth(150)
-        self.layout.addWidget(self.deny_button)
+        self.buttons_layout.addWidget(self.deny_button)
