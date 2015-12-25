@@ -107,11 +107,10 @@ class LoginWindow(QMainWindow):
 
         user = User(userid)
 
-        if user.password_hash_cmp(self.password_input.text()):
-            pass
-
-
-        self.main_screen = MainScreen()
-        self.main_screen.show()
-        self.main_screen.raise_()
-        self.hide()
+        if not user.password_hash_cmp(self.password_input.text()):
+            self.password_label.setText("Incorrect password, try again:")
+        else:
+            self.main_screen = MainScreen()
+            self.main_screen.show()
+            self.main_screen.raise_()
+            self.hide()
