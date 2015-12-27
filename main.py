@@ -10,11 +10,12 @@ from PyQt4.QtGui import *
 from LoginScreenGui import LoginWindow
 from DatabaseInit import UsersInfo
 
+
 # Main Program
 
 def main():
 
-    print("[INFO] Startup")
+    print("[INFO] System Startup")
 
     print("[INFO] Initiate UsersInfo database table")
     u = UsersInfo()

@@ -50,7 +50,7 @@ class UsersInfo(Database):
 class TasksInfo(Database):
 
     def __init__(self):
-        super().__init__(self, "Tasks")
+        super().__init__(self)
         self.create_table()
 
     def create_table(self):

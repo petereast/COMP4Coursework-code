@@ -10,6 +10,33 @@ from GlobalResources import *
 from LoginAction import *
 from DatabaseInit import *
 
+class PasswordWarningDialog(QDialog):
+    def __init__(self, errormsg="", buttonmsg="Dismiss"):
+        super().__init__()
+        print("[INFO] Created Password Warning Dialog")
+
+        self.setWindowTitle("Access Denied")        
+
+        self.main_layout = QVBoxLayout()
+        
+        self.title = QLabel("Access Denied")
+        self.title.setFont(GTitleFont)
+        self.main_layout.addWidget(self.title)
+
+        self.text = QLabel(errormsg)
+        self.text.setFont(GBodyFont)
+        self.main_layout.addWidget(self.text) 
+
+        self.dismiss_button = QPushButton(buttonmsg)
+        self.dismiss_button.clicked.connect(lambda: self.close())
+        self.main_layout.addWidget(self.dismiss_button)
+
+        self.subtext = QLabel("If the problem persists, please contact the system administrator")
+        self.subtext.setFont(GSmallText)
+        self.main_layout.addWidget(self.subtext)
+
+        self.setLayout(self.main_layout)
+
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -100,17 +127,27 @@ class LoginWindow(QMainWindow):
 
         self.setCentralWidget(self.widget)
 
+    def _show_error_dialog(self, text="", button="Dismiss"):
+        er = PasswordWarningDialog(text, button)
+        er.show()
+        er.raise_()
+        er.exec_()
+
     def login_action(self):
+        try:
+            userid = UsersInfo().get_uid_by_username(self.username_input.text())
+            user = User(userid)
+            if not user.password_hash_cmp(self.password_input.text()):
+                self.password_label.setText("Incorrect password, try again:")
+                self._show_error_dialog("Password not recognised")
+            
+            else:
+                self.main_screen = MainScreen()
+                self.main_screen.show()
+                self.main_screen.raise_()
+                self.hide()
+        except IndexError:
+            self._show_error_dialog("Username not recognised")
+            
 
-        userid = UsersInfo().get_uid_by_username(self.username_input.text())
-        print(userid)
-
-        user = User(userid)
-
-        if not user.password_hash_cmp(self.password_input.text()):
-            self.password_label.setText("Incorrect password, try again:")
-        else:
-            self.main_screen = MainScreen()
-            self.main_screen.show()
-            self.main_screen.raise_()
-            self.hide()
+        
