@@ -7,8 +7,9 @@ from GlobalResources import *
 from Tasks import *
 
 class TaskView(QWidget):
-    def __init__(self):
+    def __init__(self, user = None):
         super().__init__()
+        self.user = user
 
         self.main_layout = QVBoxLayout()
 
@@ -33,7 +34,7 @@ class TaskView(QWidget):
         # Add some example data
         data = QStandardItemModel()
 
-        # This will be fetched from a database using different code in another class
+        # This will be fetched from a database using different code in another class        
         exampleItems = [Task("Hello world", "Testing 123", 2), Task("Hello again world :)","This is a demo", 2)]
 
         for item in exampleItems:

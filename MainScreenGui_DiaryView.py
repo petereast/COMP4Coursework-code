@@ -114,9 +114,20 @@ class DiaryView(QWidget):
         self.main_layout.addWidget(self.middle_widget)
         self.setLayout(self.main_layout)
 
+    def _update_meeting_list(self):
+
+        print("[INFO] Attempting to update meetings list")
+        item = self.meetings_layout.takeAt(0)
+        while item:
+            item = self.meetings_layout.takeAt(0)
+            self.meetings_layout.update()
+        print(item)
+        
+
     def display_new_meeting_dialog(self):
         new_meeting_dialog = NewMeetingDialog(self.user)
         new_meeting_dialog.exec_()
+        self._update_meeting_list()
 
     def display_respond_to_meetings_dialog(self):
         self.pending_number.update(self.pending_number.getValue()-1)
