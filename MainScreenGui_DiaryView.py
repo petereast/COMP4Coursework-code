@@ -40,7 +40,6 @@ class DiaryView(QWidget):
         #Get a list of meetings
         meetings_list = MeetingsInfo(None).get_meetings_by_owner(user.id)
         print("{0} Meeting(s) found.".format(len(meetings_list)))
-        print(meetings_list)
         meetings_widgets = []
         for m in meetings_list:
             meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
@@ -115,7 +114,7 @@ class DiaryView(QWidget):
         self.setLayout(self.main_layout)
 
     def _update_meeting_list(self):
-
+        #TODO: This still needs significant work
         print("[INFO] Attempting to update meetings list")
         item = self.meetings_layout.takeAt(0)
         while item:

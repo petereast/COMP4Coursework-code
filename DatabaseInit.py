@@ -55,6 +55,21 @@ class TasksInfo(Database):
 
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_TASKS)
+        self._connect_and_execute(SqlDictionary.CREATE_TASKATTENDEE)
+    
+    def get_info_by_id(self, task_id):
+        sql = SqlDictionary.GET_TASK.format("WHERE (TaskID = {0}".format(task_id))
+        return self._connect_and_execute(sql)[0]
+    
+    def get_ids_by_owner(self, owner_id):
+        sql = SqlDictionary.GET_TASK_ID_LIST.format("WHERE Owner = {0}".format(owner_id))
+        output_ids = []
+        for row in self._connect_and_execute(sql):
+            output_ids.append(row[0])
+        return output_ids
+   
+    def add_task(self, info):
+        SQL_DATA = """{0}, {1}, {2}, {3}""";
 
 
 class MeetingsInfo(Database):

@@ -29,7 +29,6 @@ class Meeting:
         dbmeeting = MeetingsInfo(info)
 
         raw_info = dbmeeting.get_meeting_info()
-        print(raw_info)
         self.info = {"Title":raw_info[2], "Location":raw_info[4], "ISOTime":raw_info[3], "MeetingID":raw_info[0]}
 
         # TODO: Add code to get the attendees from the MeetingAttendee table

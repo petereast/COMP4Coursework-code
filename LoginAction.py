@@ -14,7 +14,6 @@ class User:
         self.dbinterface = UsersInfo()
 
         self.update_user_info()
-        print(self.user_id)
 
     def password_hash_cmp(self, password_input):
         currenthash = self.info["Password"]
@@ -34,7 +33,6 @@ class User:
 
     def update_user_info(self):
         raw_info = self.dbinterface.get_all_users("WHERE(UserID = {0})".format(self.user_id))[0]
-        print(raw_info)
         self.info["UserID"] =  self.user_id
         self.info["Name"] = raw_info[1]
         self.info["Username"] = raw_info[2]

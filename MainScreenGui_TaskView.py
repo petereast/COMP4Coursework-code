@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from NewTaskDialog import *
 
 from GlobalResources import *
+from DatabaseInit import *
 from Tasks import *
 
 class TaskView(QWidget):
@@ -36,6 +37,9 @@ class TaskView(QWidget):
 
         # This will be fetched from a database using different code in another class        
         exampleItems = [Task("Hello world", "Testing 123", 2), Task("Hello again world :)","This is a demo", 2)]
+
+        #Database fetch example
+        ids = TasksInfo().get_ids_by_owner(self.user.id)
 
         for item in exampleItems:
             tmp = QStandardItem(item.text)

@@ -63,7 +63,7 @@ class MainScreen(QMainWindow):
         diary_view = DiaryView(user)
 
         # Task View
-        task_view = TaskView()
+        task_view = TaskView(user)
 
         # Resources view
         resources_view = ResourcesView()
