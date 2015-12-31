@@ -10,9 +10,9 @@ from RespondToPendingRequestsDialog import *
 from IndicatorBadge import *
 
 class DiaryView(QWidget):
-    def __init__(self):
+    def __init__(self, user = None):
         super().__init__()
-
+        self.user = user
         print("[INFO] Created MainScreenGuiDiaryView")
 
         self.main_layout = QVBoxLayout()
@@ -37,22 +37,25 @@ class DiaryView(QWidget):
         # Enumerate these meetings
         # have an array of meetingss objects
 
-        meetings_list = []
-
+        #Get a list of meetings
+        meetings_list = MeetingsInfo(None).get_meetings_by_owner(user.id)
+        print("{0} Meeting(s) found.".format(len(meetings_list)))
+        print(meetings_list)
         meetings_widgets = []
         for m in meetings_list:
-            pass
+            meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
+            self.meetings_layout.addWidget(meetings_widgets[-1])
 
 
 
-        self.demo_meeting = MeetingOverview(Meeting(meeting_id=1))
-        self.meetings_layout.addWidget(self.demo_meeting)
-        self.demo_meeting1 = MeetingOverview(Meeting(meeting_id=2))
-        self.meetings_layout.addWidget(self.demo_meeting1)
-        self.demo_meeting2 = MeetingOverview(Meeting(meeting_id=1))
-        self.meetings_layout.addWidget(self.demo_meeting2)
-        self.demo_meeting3 = MeetingOverview(Meeting(meeting_id=2))
-        self.meetings_layout.addWidget(self.demo_meeting3)
+        #self.demo_meeting = MeetingOverview(Meeting(meeting_id=1))
+        #self.meetings_layout.addWidget(self.demo_meeting)
+        #self.demo_meeting1 = MeetingOverview(Meeting(meeting_id=2))
+        #self.meetings_layout.addWidget(self.demo_meeting1)
+        #self.demo_meeting2 = MeetingOverview(Meeting(meeting_id=1))
+        #self.meetings_layout.addWidget(self.demo_meeting2)
+        #self.demo_meeting3 = MeetingOverview(Meeting(meeting_id=2))
+        #self.meetings_layout.addWidget(self.demo_meeting3)
 
         self.meetings_widget.setLayout(self.meetings_layout)
         #self.meetings_widget.setMinimumSize(300, 700)
@@ -112,7 +115,7 @@ class DiaryView(QWidget):
         self.setLayout(self.main_layout)
 
     def display_new_meeting_dialog(self):
-        new_meeting_dialog = NewMeetingDialog()
+        new_meeting_dialog = NewMeetingDialog(self.user)
         new_meeting_dialog.exec_()
 
     def display_respond_to_meetings_dialog(self):

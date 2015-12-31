@@ -8,9 +8,9 @@ from GlobalResources import *
 from DatabaseInit import MeetingsInfo
 
 class NewMeetingDialog(QDialog):
-    def __init__(self):
+    def __init__(self, user = None):
         super().__init__()
-
+        self.user = user
         self.main_layout = QVBoxLayout()
 
         self.setWindowTitle("Add New Meeting")
@@ -56,7 +56,7 @@ class NewMeetingDialog(QDialog):
         self.setLayout(self.main_layout)
 
     def add_meeting(self):
-        info = {"OwnerID": 0, # This is where to do the username lookup
+        info = {"OwnerID": self.user.id, # This is where to do the username lookup
             "Title":self.meeting_title_entry.text(),
             "ISOTime":self.when_entry.text(),
             "Location":self.where_entry.text(),

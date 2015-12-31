@@ -40,8 +40,7 @@ class User:
         self.info["Username"] = raw_info[2]
         self.info["Password"] =  raw_info[3]
         self.info["Permissions"] = raw_info[4]
-
-        print(self.info)
+        self.id = self.info["UserID"]
 
 class UserSession(User):
     def __init__(self):

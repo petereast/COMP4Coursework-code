@@ -13,7 +13,7 @@ class MeetingOverview(QFrame):
         Should take a Meeting object as a parameter rather than passing all of the individual parameters in.
         """
         super().__init__()
-
+        self.meeting = meeting
         self.layout = QVBoxLayout()
 
         self.setFrameStyle(QFrame.StyledPanel + QFrame.Sunken)
@@ -46,6 +46,11 @@ class MeetingOverview(QFrame):
         self.layout.addWidget(self.buttons_widget)
         self.setLayout(self.layout)
         self.setMinimumSize(400, 200)
+    
+    def _edit_button_action(self):
+        #Create a NewMeetingDialog with the information from this meeting
+        pass
+        
 
 class PendingMeetingOverview(MeetingOverview):
     def __init__(self, meeting):

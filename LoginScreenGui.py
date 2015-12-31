@@ -142,7 +142,7 @@ class LoginWindow(QMainWindow):
                 self._show_error_dialog("Password not recognised")
             
             else:
-                self.main_screen = MainScreen()
+                self.main_screen = MainScreen(user)
                 self.main_screen.show()
                 self.main_screen.raise_()
                 self.hide()

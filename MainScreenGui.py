@@ -23,7 +23,7 @@ except ImportError:
 # Implementation of the tabbed layout could use a QStackedLayout
 
 class MainScreen(QMainWindow):
-    def __init__(self):
+    def __init__(self, user=None):
         super().__init__()
         print("[INFO] Created MainScreenGui")
 
@@ -60,7 +60,7 @@ class MainScreen(QMainWindow):
         # Define the views for the view_switcher
         # Diary View
 
-        diary_view = DiaryView()
+        diary_view = DiaryView(user)
 
         # Task View
         task_view = TaskView()
