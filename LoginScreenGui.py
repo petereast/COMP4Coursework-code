@@ -31,7 +31,7 @@ class PasswordWarningDialog(QDialog):
         self.dismiss_button.clicked.connect(lambda: self.close())
         self.main_layout.addWidget(self.dismiss_button)
 
-        self.subtext = QLabel("If the problem persists, please contact the system administrator")
+        self.subtext = QLabel("If the problem persists, please contact the system administrator.")
         self.subtext.setFont(GSmallText)
         self.main_layout.addWidget(self.subtext)
 

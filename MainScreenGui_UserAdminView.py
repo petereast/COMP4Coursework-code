@@ -60,14 +60,18 @@ class UserAdminView(QWidget):
         # the proper privellages
 
         self.admin_tools = QGroupBox()
-        self.admin_tools.setTitle("Administrative Tools")
+        self.admin_tools.setTitle("Administrative Tools "+u"\U0001F512") #Set this to change depending on if the thing is locked or not
         self.admin_tools_layout = QVBoxLayout()
         
         # Show a scrollable list of the UserOverview(s) for all the registered users, and add management
         # tools, eg "Delete User", "Add new user"
+
+        # It miggh be a good idea to wait until the card updating system is sorted.
         self.admin_tools.setLayout(self.admin_tools_layout)
     
         self.master_layout.addWidget(self.admin_tools)
+
+        self.admin_tools.setFont(GBodyFont)
 
         self.setLayout(self.master_layout)
         
