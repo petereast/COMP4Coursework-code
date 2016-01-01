@@ -6,8 +6,11 @@ from PyQt4.QtGui import *
 from GlobalResources import *
 from Tasks import *
 
+from DatabaseInit import TasksInfo
+
 class NewTaskDialog(QDialog):
-    def __init__(self):
+    def __init__(self, user):
+        self.user = user
         super().__init__()
 
         self.main_layout = QVBoxLayout()
@@ -40,6 +43,7 @@ class NewTaskDialog(QDialog):
         self.main_layout.addWidget(self.description_entry)
 
         self.submit_button = QPushButton("Submit")
+        self.submit_button.clicked.connect(self.submit)
         self.main_layout.addWidget(self.submit_button)
 
         self.setLayout(self.main_layout)
@@ -61,5 +65,6 @@ class NewTaskDialog(QDialog):
         pass
 
     def submit(self):
-        #prepare the database submission
-        pass
+        info = {"Title":self.title_entry.text(), "Description":self.description_entry.text(), "OwnerID":self.user.id, "Attendees":"''"}
+        TasksInfo().add_task(info)
+        self.close()

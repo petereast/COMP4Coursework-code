@@ -13,6 +13,7 @@ class Database:
         self.db_name = database_name
 
     def _connect_and_execute(self, sql="", database_name=None):
+        print(sql)
         if database_name == None:
             database_name = self.db_name
 
@@ -58,8 +59,9 @@ class TasksInfo(Database):
         self._connect_and_execute(SqlDictionary.CREATE_TASKATTENDEE)
     
     def get_info_by_id(self, task_id):
-        sql = SqlDictionary.GET_TASK.format("WHERE (TaskID = {0}".format(task_id))
-        return self._connect_and_execute(sql)[0]
+        sql = SqlDictionary.GET_TASK.format("WHERE (TaskID = {0})".format(task_id))
+        raw = self._connect_and_execute(sql)[0]
+        return {"TaskID":raw[0], "Title":raw[1], "Description":raw[2], "OwnerID":raw[3], "Attendees":raw[4]}
     
     def get_ids_by_owner(self, owner_id):
         sql = SqlDictionary.GET_TASK_ID_LIST.format("WHERE Owner = {0}".format(owner_id))
@@ -69,7 +71,9 @@ class TasksInfo(Database):
         return output_ids
    
     def add_task(self, info):
-        SQL_DATA = """{0}, {1}, {2}, {3}""";
+        SQL_DATA = """'{0}', '{1}', {2}, {3}""".format(info["Title"], info["Description"], info["OwnerID"], info["Attendees"])
+        self._connect_and_execute(SqlDictionary.ADD_TASK.format(SQL_DATA))
+        
 
 
 class MeetingsInfo(Database):

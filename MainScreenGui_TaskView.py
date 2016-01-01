@@ -32,23 +32,8 @@ class TaskView(QWidget):
 
         self.task_list_view = QListView()
 
-        # Add some example data
-        data = QStandardItemModel()
+        self.update_task_list()
 
-        # This will be fetched from a database using different code in another class        
-        exampleItems = [Task("Hello world", "Testing 123", 2), Task("Hello again world :)","This is a demo", 2)]
-
-        #Database fetch example
-        ids = TasksInfo().get_ids_by_owner(self.user.id)
-
-        for item in exampleItems:
-            tmp = QStandardItem(item.text)
-
-            tmp.setCheckable(True)
-
-            data.appendRow(tmp)
-
-        self.task_list_view.setModel(data)
 
         self.left_layout.addWidget(self.task_list_view)
         self.left_widget.setLayout(self.left_layout)
@@ -80,6 +65,23 @@ class TaskView(QWidget):
         self.setLayout(self.main_layout)
 
     def display_new_task_dialog(self):
-        new_task_dialog = NewTaskDialog()
+        new_task_dialog = NewTaskDialog(self.user)
 
         new_task_dialog.exec_()
+        self.update_task_list()
+
+    def update_task_list(self):
+        # Add some data from the database
+        data = QStandardItemModel()
+
+        #Database fetch example
+        ids = TasksInfo().get_ids_by_owner(self.user.id)
+        print("[INFO] {0} Tasks found for user id: {0}".format(len(ids), self.user.id))
+        self.tasks = []
+        for taskID in ids:
+            self.tasks.append(Task(databaseid=taskID))
+            
+            tmp = QStandardItem(self.tasks[-1].text)
+            tmp.setCheckable(True)
+            data.appendRow(tmp)
+        self.task_list_view.setModel(data)
