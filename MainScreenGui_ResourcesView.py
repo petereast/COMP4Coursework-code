@@ -5,7 +5,9 @@ from GlobalResources import *
 
 
 class ResourcesView(QWidget):
-    def __init__(self):
+    def __init__(self, user):
+
+        self.user = user
         super().__init__()
 
         self.main_layout = QVBoxLayout()

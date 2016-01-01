@@ -12,8 +12,9 @@ class Task:
             self.text  = self.title + "\n  " + self.subtitle
         else:
             self.info = TasksInfo().get_info_by_id(databaseid)
-            self.text = self.info["Title"] +"\n\t"+self.info["Description"]
-            print(self.info)
+            self.text = self.info["Title"] +"\n  "+self.info["Description"]
+            # TODO: The tasks are gonna need a due date and priority in the database so that
+            # the listings can be ordered by priority.
             pass
 
     def load_task_from_database(self, taskid):

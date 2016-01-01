@@ -66,7 +66,11 @@ class MainScreen(QMainWindow):
         task_view = TaskView(user)
 
         # Resources view
-        resources_view = ResourcesView()
+        resources_view = ResourcesView(user)
+
+        # User Admin View
+        
+        user_admin_view = UserAdminView(user)
 
 
         # Define the view switcher
@@ -75,6 +79,7 @@ class MainScreen(QMainWindow):
         self.view_switcher.addTab(diary_view, "Planner")
         self.view_switcher.addTab(task_view, "Tasks")
         self.view_switcher.addTab(resources_view, "Resources")
+        self.view_switcher.addTab(user_admin_view, "User Admin")
 
         self.view_switcher.setFont(GBodyFont)
 

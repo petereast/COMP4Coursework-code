@@ -71,6 +71,8 @@ class TaskView(QWidget):
         self.update_task_list()
 
     def update_task_list(self):
+
+        print("[INFO] Updating task list... ")
         # Add some data from the database
         data = QStandardItemModel()
 
@@ -85,3 +87,4 @@ class TaskView(QWidget):
             tmp.setCheckable(True)
             data.appendRow(tmp)
         self.task_list_view.setModel(data)
+        print("[INFO] Task view update successful")

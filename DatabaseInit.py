@@ -13,7 +13,7 @@ class Database:
         self.db_name = database_name
 
     def _connect_and_execute(self, sql="", database_name=None):
-        print(sql)
+        #print(sql)
         if database_name == None:
             database_name = self.db_name
 
