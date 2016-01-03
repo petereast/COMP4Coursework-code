@@ -130,5 +130,5 @@ class DiaryView(QWidget):
 
     def display_respond_to_meetings_dialog(self):
         self.pending_number.update(self.pending_number.getValue()-1)
-        respond_to_meetings_dialog = RespondToPendingMeetingDialog()
+        respond_to_meetings_dialog = RespondToPendingMeetingDialog(self.user)
         respond_to_meetings_dialog.exec_()

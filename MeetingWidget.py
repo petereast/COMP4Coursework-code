@@ -38,6 +38,9 @@ class MeetingOverview(QFrame):
         self.buttons_widget = QWidget()
         self.buttons_layout = QHBoxLayout()
 
+        self.delete_button = QPushButton("Delete")
+        self.buttons_layout.addWidget(self.delete_button)
+
         self.edit_button = QPushButton("Edit")
         self.edit_button.setFixedWidth(150)
         self.buttons_layout.addWidget(self.edit_button)
@@ -61,3 +64,18 @@ class PendingMeetingOverview(MeetingOverview):
         self.deny_button = QPushButton("Respond - Deny")
         self.deny_button.setFixedWidth(150)
         self.buttons_layout.addWidget(self.deny_button)
+
+class PleaseSelectMeetingPlaceholder(QFrame):
+    def __init__(self, empty = False):
+        super().__init__()
+        self.layout = QHBoxLayout()
+        
+        if not empty:
+            self.label = QLabel("Please select\na meeting")
+        else:
+            self.label = QLabel("You have no\nnew meetings")
+        self.label.setFont(GTitleFont)
+        self.layout.addWidget(self.label)
+        self.setLayout(self.layout)
+        self.setFixedWidth(300)
+        

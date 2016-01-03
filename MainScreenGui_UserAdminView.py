@@ -40,7 +40,7 @@ class UserOverview(QGroupBox):
         self.layout.addWidget(self.control_bar)
 
         self.setLayout(self.layout)
-        self.setFixedHeight(140)
+        self.setFixedHeight(160)
         self.setTitle("Me")
 
 class UserAdminView(QWidget):
