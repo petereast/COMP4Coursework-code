@@ -23,7 +23,9 @@ except ImportError:
 # Implementation of the tabbed layout could use a QStackedLayout
 
 class MainScreen(QMainWindow):
-    def __init__(self, user=None):
+    def __init__(self, user=None, parent=None):
+        self.user = user
+        self.parent = parent
         super().__init__()
         print("[INFO] Created MainScreenGui")
 
@@ -45,6 +47,7 @@ class MainScreen(QMainWindow):
 
         self.tb_logout_button = QPushButton("Logout")
         self.tb_logout_button.setFixedWidth(100)
+        self.tb_logout_button.clicked.connect(self._logout)
 
         self.topbar_layout.addWidget(self.tb_help_button)
         self.topbar_layout.addWidget(self.tb_spacer)
@@ -60,17 +63,17 @@ class MainScreen(QMainWindow):
         # Define the views for the view_switcher
         # Diary View
 
-        diary_view = DiaryView(user)
+        diary_view = DiaryView(self.user)
 
         # Task View
-        task_view = TaskView(user)
+        task_view = TaskView(self.user)
 
         # Resources view
-        resources_view = ResourcesView(user)
+        resources_view = ResourcesView(self.user)
 
         # User Admin View
         
-        user_admin_view = UserAdminView(user)
+        user_admin_view = UserAdminView(self.user)
 
 
         # Define the view switcher
@@ -91,3 +94,11 @@ class MainScreen(QMainWindow):
         # Fill in the window
         self.central_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.central_widget)
+
+    def _logout(self):
+        self.user = None
+        self.close()
+        self.parent.show()
+        self.parent.reset()
+        
+        

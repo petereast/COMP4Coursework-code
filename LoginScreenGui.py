@@ -142,12 +142,16 @@ class LoginWindow(QMainWindow):
                 self._show_error_dialog("Password not recognised")
             
             else:
-                self.main_screen = MainScreen(user)
+                self.main_screen = MainScreen(user, self)
                 self.main_screen.show()
                 self.main_screen.raise_()
                 self.hide()
         except IndexError:
             self._show_error_dialog("Username not recognised")
+
+    def reset(self):
+        self.password_input.setText("")
+        self.username_input.setText("")
             
 
         
