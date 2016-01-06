@@ -72,6 +72,8 @@ GET_MEETING = """SELECT * FROM Meetings {0};"""
 
 GET_MEETING_ID_LIST = """SELECT MeetingID FROM Meetings {0};"""
 
+ADD_MEETING_ATTENDEE = """INSERT INTO MeetingAttendee(MeetingID, UserID, Confirmed) VALUES({0})"""
+
 
 GET_TASK = """SELECT * FROM Tasks {0};"""
 

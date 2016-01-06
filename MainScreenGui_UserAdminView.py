@@ -60,7 +60,7 @@ class UserAdminView(QWidget):
         # the proper privellages
 
         self.admin_tools = QGroupBox()
-        self.admin_tools.setTitle("Administrative Tools "+u"\U0001F512") #Set this to change depending on if the thing is locked or not
+        self.admin_tools.setTitle("Administrative Tools") #Set this to change depending on if the thing is locked or not
         self.admin_tools_layout = QVBoxLayout()
         
         # Show a scrollable list of the UserOverview(s) for all the registered users, and add management

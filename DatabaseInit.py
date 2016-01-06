@@ -81,7 +81,8 @@ class MeetingsInfo(Database):
         super().__init__(self)
         self.create_table()
         self.meeting_info = meeting_info
-
+        self.id = None
+    
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS)
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS_ATTENEDEES)
@@ -93,6 +94,7 @@ class MeetingsInfo(Database):
             self.meeting_info["Location"],
             self.meeting_info["Attendees"])
         self._connect_and_execute(SqlDictionary.ADD_MEETING.format(SQL_DATA)) #TODO Sort out the formatting.
+        self.id = self._connect_and_execute("SELECT Max(MeetingID) FROM Meetings;")[0][0]
 
     def get_meeting_info(self):
         sql_condition = "WHERE (MeetingID = {0})".format(self.meeting_info['MeetingID'])
@@ -100,6 +102,10 @@ class MeetingsInfo(Database):
         results = self._connect_and_execute(q)
         return results[0]
 
+    def add_meeting_attendee(self, user_id):
+        sql_values = """{0}, {0}, 1""".format(self.id, user_id)
+        return self._connect_and_execute(SqlDictionary.ADD_MEETING_ATTENDEE.format(sql_values))
+        
 
     def get_meetings_by_owner(self, OwnerID):
         sql_condition = "WHERE (OwnerID = {0})".format(OwnerID)

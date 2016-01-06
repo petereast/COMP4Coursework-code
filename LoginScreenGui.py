@@ -13,6 +13,7 @@ from DatabaseInit import *
 class PasswordWarningDialog(QDialog):
     def __init__(self, errormsg="", buttonmsg="Dismiss"):
         super().__init__()
+        self.setModal(True)
         print("[INFO] Created Password Warning Dialog")
 
         self.setWindowTitle("Access Denied")        
@@ -37,7 +38,7 @@ class PasswordWarningDialog(QDialog):
 
         self.setLayout(self.main_layout)
 
-class LoginWindow(QMainWindow):
+class LoginWindow(QDialog):
     def __init__(self):
         super().__init__()
         print("[INFO] Created Login window")
@@ -62,6 +63,8 @@ class LoginWindow(QMainWindow):
 
         self.username_input = QLineEdit()
 
+        self.username_input.setWhatsThis("Enter your username here:")
+
         self.username_layout.addWidget(self.username_label)
         self.username_layout.addWidget(self.username_input)
 
@@ -80,6 +83,7 @@ class LoginWindow(QMainWindow):
 
         self.password_input = QLineEdit()
         self.password_input.setEchoMode(QLineEdit.Password)
+        self.password_input.returnPressed.connect(self._enter_submit)
 
         self.password_layout.addWidget(self.password_label)
         self.password_layout.addWidget(self.password_input)
@@ -90,6 +94,7 @@ class LoginWindow(QMainWindow):
 
         self.submit_button = QPushButton("Login")
         self.submit_button.clicked.connect(self.login_action)
+        self.submit_button.setDefault(True)
 
         self.help_button = QPushButton("?")
         self.help_button.setFixedWidth(30)
@@ -121,11 +126,9 @@ class LoginWindow(QMainWindow):
         self.layout.addWidget(self.buttons_widget)
         #self.layout.addWidget()
 
-        self.widget = QWidget()
-        self.widget.setFixedWidth(600)
-        self.widget.setLayout(self.layout)
+        self.setLayout(self.layout)
 
-        self.setCentralWidget(self.widget)
+        self.setFixedWidth(600)
 
     def _show_error_dialog(self, text="", button="Dismiss"):
         er = PasswordWarningDialog(text, button)
@@ -152,6 +155,10 @@ class LoginWindow(QMainWindow):
     def reset(self):
         self.password_input.setText("")
         self.username_input.setText("")
+
+    def _enter_submit(self, e):
+        if e.key() == Qt.Key_Enter:
+            self.login_action(self)
             
 
         

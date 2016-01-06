@@ -1,11 +1,13 @@
 # New Meeting Dialog
 
+import re
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from GlobalResources import *
 
-from DatabaseInit import MeetingsInfo
+from DatabaseInit import *
 
 class NewMeetingDialog(QDialog):
     def __init__(self, user = None):
@@ -29,6 +31,9 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.attendees_label)
         self.attendees_entry = QLineEdit()
         self.main_layout.addWidget(self.attendees_entry)
+        # self.attendees_entry.textChanged.connect(self._add_attendees)
+        self.attendees_info_label = QLabel("A list of usernames seperated by semicolons")
+        self.attendees_info_label.setFont(GSmallText)
 
         self.where_label = QLabel("Where")
         self.main_layout.addWidget(self.where_label)
@@ -64,4 +69,28 @@ class NewMeetingDialog(QDialog):
         }
         meeting = MeetingsInfo(info)
         meeting.add_meeting()
+        self._add_attendees(meeting)
         self.close()
+
+    def _add_attendees(self, meeting):
+        raw_attendee_list = self.attendees_entry.text()
+        #Parse this into a list of attendees, seperated by eiter semicolons or commas.
+        pattern = re.compile("([a-zA-Z]+;?)")
+        # Iterate through the list of attendees
+        print(pattern.findall(raw_attendee_list))
+        
+        for string in pattern.findall(raw_attendee_list):
+            
+            if string[-1] == ";":
+                string = string[0:-1]
+            try:
+                attendeeID = UsersInfo().get_uid_by_username(string)
+            except IndexError:
+                print("[WARN] Username '{0}' not recognised".format(string))
+                attendeeID = 0
+            if attendeeID:
+                meeting.add_meeting_attendee(attendeeID)
+                
+        
+
+        
