@@ -57,32 +57,32 @@ class TasksInfo(Database):
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_TASKS)
         self._connect_and_execute(SqlDictionary.CREATE_TASKATTENDEE)
-    
+
     def get_info_by_id(self, task_id):
         sql = SqlDictionary.GET_TASK.format("WHERE (TaskID = {0})".format(task_id))
         raw = self._connect_and_execute(sql)[0]
         return {"TaskID":raw[0], "Title":raw[1], "Description":raw[2], "OwnerID":raw[3], "Attendees":raw[4]}
-    
+
     def get_ids_by_owner(self, owner_id):
         sql = SqlDictionary.GET_TASK_ID_LIST.format("WHERE Owner = {0}".format(owner_id))
         output_ids = []
         for row in self._connect_and_execute(sql):
             output_ids.append(row[0])
         return output_ids
-   
+
     def add_task(self, info):
         SQL_DATA = """'{0}', '{1}', {2}, {3}""".format(info["Title"], info["Description"], info["OwnerID"], info["Attendees"])
         self._connect_and_execute(SqlDictionary.ADD_TASK.format(SQL_DATA))
-        
+
 
 
 class MeetingsInfo(Database):
-    def __init__(self, meeting_info):
+    def __init__(self, meeting_info = None):
         super().__init__(self)
         self.create_table()
         self.meeting_info = meeting_info
         self.id = None
-    
+
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS)
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS_ATTENEDEES)
@@ -105,9 +105,13 @@ class MeetingsInfo(Database):
     def add_meeting_attendee(self, user_id):
         sql_values = """{0}, {0}, 1""".format(self.id, user_id)
         return self._connect_and_execute(SqlDictionary.ADD_MEETING_ATTENDEE.format(sql_values))
-        
+
 
     def get_meetings_by_owner(self, OwnerID):
         sql_condition = "WHERE (OwnerID = {0})".format(OwnerID)
         q = SqlDictionary.GET_MEETING_ID_LIST.format(sql_condition)
         return self._connect_and_execute(q)
+
+    def get_outstanding_meetings(self, OwnerID):
+        results = self._connect_and_execute(SqlDictionary.GET_OUTSTANDING_MEETINGS_TO_BE_ATTENDED.format(OwnerID))
+        return results

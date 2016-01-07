@@ -46,16 +46,6 @@ class DiaryView(QWidget):
             self.meetings_layout.addWidget(meetings_widgets[-1])
 
 
-
-        #self.demo_meeting = MeetingOverview(Meeting(meeting_id=1))
-        #self.meetings_layout.addWidget(self.demo_meeting)
-        #self.demo_meeting1 = MeetingOverview(Meeting(meeting_id=2))
-        #self.meetings_layout.addWidget(self.demo_meeting1)
-        #self.demo_meeting2 = MeetingOverview(Meeting(meeting_id=1))
-        #self.meetings_layout.addWidget(self.demo_meeting2)
-        #self.demo_meeting3 = MeetingOverview(Meeting(meeting_id=2))
-        #self.meetings_layout.addWidget(self.demo_meeting3)
-
         self.meetings_widget.setLayout(self.meetings_layout)
         #self.meetings_widget.setMinimumSize(300, 700)
 
@@ -92,7 +82,7 @@ class DiaryView(QWidget):
         self.respond_to_pending_appointments_button.setFixedHeight(30)
         self.response_layout.addWidget(self.respond_to_pending_appointments_button)
 
-        self.pending_number = Indicator(34)
+        self.pending_number = Indicator(len(MeetingsInfo().get_outstanding_meetings(self.user.id)))
         self.response_layout.addWidget(self.pending_number)
 
         self.response_container.setLayout(self.response_layout)
@@ -121,7 +111,7 @@ class DiaryView(QWidget):
             item = self.meetings_layout.takeAt(0)
             self.meetings_layout.update()
         print(item)
-        
+
 
     def display_new_meeting_dialog(self):
         new_meeting_dialog = NewMeetingDialog(self.user)

@@ -32,7 +32,7 @@ class RespondToPendingMeetingDialog(QDialog):
 
         self.meetings_list_view = QListView()
         self.meetings_list_view.clicked.connect(self._switch_right_stack)
-        
+
         # End of 'following code'
         self.left_pane_layout.addWidget(self.meetings_list_view)
 
@@ -57,12 +57,12 @@ class RespondToPendingMeetingDialog(QDialog):
 
     def update_pending_meeting_list(self):
         print("[INFO] Updating list of pending appointments")
-        
+
         self.data = QStandardItemModel()
 
-        ids = MeetingsInfo({}).get_meetings_by_owner(self.user.id)
+        ids = MeetingsInfo({}).get_outstanding_meetings(self.user.id)
         print("[INFO] {0} meetings found for user id: {1}".format(len(ids), self.user.id))
-        
+
         self.meetings = []
         for meetingID in ids:
             self.meetings.append(Meeting(meeting_id=meetingID[0]))
@@ -72,7 +72,7 @@ class RespondToPendingMeetingDialog(QDialog):
             tmp.setCheckable(False)
             self.data.appendRow(tmp)
         self.meetings_list_view.setModel(self.data)
-  
+
         # Use a QStackedLayout to have the stack of meeting widgets
 
     def _switch_right_stack(self):

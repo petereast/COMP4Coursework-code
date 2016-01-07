@@ -16,17 +16,17 @@ class PasswordWarningDialog(QDialog):
         self.setModal(True)
         print("[INFO] Created Password Warning Dialog")
 
-        self.setWindowTitle("Access Denied")        
+        self.setWindowTitle("Access Denied")
 
         self.main_layout = QVBoxLayout()
-        
+
         self.title = QLabel("Access Denied")
         self.title.setFont(GTitleFont)
         self.main_layout.addWidget(self.title)
 
         self.text = QLabel(errormsg)
         self.text.setFont(GBodyFont)
-        self.main_layout.addWidget(self.text) 
+        self.main_layout.addWidget(self.text)
 
         self.dismiss_button = QPushButton(buttonmsg)
         self.dismiss_button.clicked.connect(lambda: self.close())
@@ -143,7 +143,7 @@ class LoginWindow(QDialog):
             if not user.password_hash_cmp(self.password_input.text()):
                 self.password_label.setText("Incorrect password, try again:")
                 self._show_error_dialog("Password not recognised")
-            
+
             else:
                 self.main_screen = MainScreen(user, self)
                 self.main_screen.show()
@@ -156,9 +156,6 @@ class LoginWindow(QDialog):
         self.password_input.setText("")
         self.username_input.setText("")
 
-    def _enter_submit(self, e):
-        if e.key() == Qt.Key_Enter:
-            self.login_action(self)
-            
+    def _enter_submit(self, e = None):
 
-        
+        self.login_action(self)
