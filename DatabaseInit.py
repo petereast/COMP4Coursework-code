@@ -40,6 +40,9 @@ class UsersInfo(Database):
     def get_uid_by_username(self, username=""):
         return self._connect_and_execute((SqlDictionary.GET_USER_ID.format(username)))[0][0]
 
+    def get_username_by_uid(self, uid=None):
+        return self._connect_and_execute(SqlDictionary.GET_USERNAME_BY_UID.format(uid))[0][0]
+
     def add_user(self, info):
         #info follows the format {"SQL value":Data value}
         values = "`{0}`, `{1}`, `{2}`, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
@@ -103,7 +106,7 @@ class MeetingsInfo(Database):
         return results[0]
 
     def add_meeting_attendee(self, user_id):
-        sql_values = """{0}, {0}, 1""".format(self.id, user_id)
+        sql_values = """{0}, {1}, 0""".format(self.id, user_id)
         return self._connect_and_execute(SqlDictionary.ADD_MEETING_ATTENDEE.format(sql_values))
 
 
@@ -115,3 +118,6 @@ class MeetingsInfo(Database):
     def get_outstanding_meetings(self, OwnerID):
         results = self._connect_and_execute(SqlDictionary.GET_OUTSTANDING_MEETINGS_TO_BE_ATTENDED.format(OwnerID))
         return results
+
+    def get_meeting_attendees(self, MeetingID):
+        return self._connect_and_execute(SqlDictionary.GET_MEETING_ATTENDEES.format(MeetingID))

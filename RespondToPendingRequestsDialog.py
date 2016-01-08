@@ -60,7 +60,7 @@ class RespondToPendingMeetingDialog(QDialog):
 
         self.data = QStandardItemModel()
 
-        ids = MeetingsInfo({}).get_outstanding_meetings(self.user.id)
+        ids = MeetingsInfo().get_outstanding_meetings(self.user.id)
         print("[INFO] {0} meetings found for user id: {1}".format(len(ids), self.user.id))
 
         self.meetings = []

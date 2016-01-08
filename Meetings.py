@@ -1,7 +1,7 @@
 # Meetings.py - Class definition for use with meetings stuff
 
 from GlobalResources import *
-from DatabaseInit import MeetingsInfo
+from DatabaseInit import MeetingsInfo, UsersInfo
 
 class Meeting:
     def __init__(self, title="[Blank Meeting]", place="[Nowhere]", attendees=["[Demo Person 1]", "[Demo Person 2]"], when="[Sometime]", meeting_id=1):
@@ -29,7 +29,7 @@ class Meeting:
         dbmeeting = MeetingsInfo(info)
 
         raw_info = dbmeeting.get_meeting_info()
-        self.info = {"Title":raw_info[2], "Location":raw_info[4], "ISOTime":raw_info[3], "MeetingID":raw_info[0]}
+        self.info = {"Title":raw_info[2], "Location":raw_info[4], "ISOTime":raw_info[3], "MeetingID":raw_info[0], "OwnerID":raw_info[1]}
 
         # TODO: Add code to get the attendees from the MeetingAttendee table
 
@@ -38,6 +38,16 @@ class Meeting:
     def _update_info(self):
         self.title = self.info["Title"]
         self.place = self.info["Location"]
-        self.attendees = ['TODO', 'TODO'] # this'll be the entry point for the DB query
+        self.attendees = [] # this'll be the entry point for the DB query
+        self._get_attendees_from_database()
         self.when = self.info["ISOTime"]
         self.meeting_id = self.info["MeetingID"]
+
+    def _get_attendees_from_database(self):
+        attendees = MeetingsInfo().get_meeting_attendees(self.meeting_id)
+        
+        for a in attendees:
+            attendee_id = a[0]
+            # Lookup the username
+            username = UsersInfo().get_username_by_uid(attendee_id)
+            self.attendees.append(username)

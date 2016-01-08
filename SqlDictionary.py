@@ -58,6 +58,7 @@ CREATE_RESOURCES = """CREATE TABLE IF NOT EXISTS Resources
 );
 """
 
+# Users
 
 GET_ALL_USERS = """ SELECT * FROM Users {0}; """
 
@@ -65,17 +66,21 @@ GET_USER_ID = """ SELECT UserID FROM Users WHERE (Username = '{0}');"""
 
 ADD_USER = """INSERT INTO Users(Name, Username, Password, Permissions) VALUES({0});"""
 
+# Meetings
 
 ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location, Attendees) VALUES({0})"""
 
 GET_MEETING = """SELECT * FROM Meetings {0};"""
 
-GET_OUTSTANDING_MEETINGS_TO_BE_ATTENDED = """SELECT * FROM MeetingAttendee WHERE (UserID = {0} AND Confirmed = 'False');"""
+GET_OUTSTANDING_MEETINGS_TO_BE_ATTENDED = """SELECT * FROM MeetingAttendee WHERE (UserID = {0} AND Confirmed = 0);"""
 
 GET_MEETING_ID_LIST = """SELECT MeetingID FROM Meetings {0};"""
 
 ADD_MEETING_ATTENDEE = """INSERT INTO MeetingAttendee(MeetingID, UserID, Confirmed) VALUES({0})"""
 
+GET_MEETING_ATTENDEES = """SELECT UserID FROM MeetingAttendee WHERE (MeetingID = {0})"""
+
+# Tasks
 
 GET_TASK = """SELECT * FROM Tasks {0};"""
 
@@ -83,4 +88,7 @@ GET_TASK_ID_LIST = "SELECT TaskID FROM Tasks {0};"""
 
 ADD_TASK = """INSERT INTO Tasks(Title, Description, Owner, Attendees) VALUES({0});"""
 
-ekjsb = """DELETE FROM Tasks WHERE FieldName = 'BAlah'"""
+GET_USERNAME_BY_UID = """SELECT Name FROM Users WHERE(UserID = {0})"""
+
+
+

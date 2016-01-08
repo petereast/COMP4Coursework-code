@@ -5,6 +5,7 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 from Meetings import Meeting
+from DatabaseInit import UsersInfo
 #from Meetings import *
 
 class MeetingOverview(QFrame):
@@ -26,6 +27,9 @@ class MeetingOverview(QFrame):
 
         self.place_title = QLabel("At: "+meeting.place)
         self.layout.addWidget(self.place_title)
+
+        self.owner_label = QLabel()
+        self.layout.addWidget(self.owner_label)
 
         self.attendees_title = QLabel("Attendees:")
         self.layout.addWidget(self.attendees_title)
@@ -58,6 +62,10 @@ class MeetingOverview(QFrame):
 class PendingMeetingOverview(MeetingOverview):
     def __init__(self, meeting):
         super().__init__(meeting)
+
+        # Get the owner's name
+        owner_name = UsersInfo().get_username_by_uid(meeting.info["OwnerID"])
+        self.owner_label.setText("From: {0}".format(owner_name))
 
         self.edit_button.setText("Respond - Confirm")
 
