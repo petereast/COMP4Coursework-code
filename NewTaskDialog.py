@@ -47,6 +47,7 @@ class NewTaskDialog(QDialog):
         self.main_layout.addWidget(self.submit_button)
 
         self.setLayout(self.main_layout)
+        self.setFont(GBodyFont)
 
     def update_window_title(self):
         newtext = self.title_entry.text().title()[0:45]

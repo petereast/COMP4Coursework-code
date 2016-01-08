@@ -28,6 +28,9 @@ class MeetingOverview(QFrame):
         self.place_title = QLabel("At: "+meeting.place)
         self.layout.addWidget(self.place_title)
 
+        self.when_title = QLabel(meeting.when)
+        self.layout.addWidget(self.when_title)
+
         self.owner_label = QLabel()
         self.layout.addWidget(self.owner_label)
 

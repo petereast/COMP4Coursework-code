@@ -127,6 +127,7 @@ class LoginWindow(QDialog):
         #self.layout.addWidget()
 
         self.setLayout(self.layout)
+        self.setFont(GBodyFont)
 
         self.setFixedWidth(600)
 
