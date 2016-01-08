@@ -121,3 +121,9 @@ class MeetingsInfo(Database):
 
     def get_meeting_attendees(self, MeetingID):
         return self._connect_and_execute(SqlDictionary.GET_MEETING_ATTENDEES.format(MeetingID))
+
+    def respond_to_attendance_request(self, attending, MeetingID, UserID):
+        if attending:
+            self._connect_and_execute(SqlDictionary.ACCEPT_MEETING.format("UserID = {0} AND MeetingID = {1}".format(UserID, MeetingID)))
+        else:
+            self._connect_and_execute(SqlDictionary.REJECT_MEETING.format("UserID = {0} AND {MeetingID = {1}".format(UserID, MeetingID)))

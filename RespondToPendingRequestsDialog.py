@@ -67,7 +67,7 @@ class RespondToPendingMeetingDialog(QDialog):
         for meetingID in ids:
             self.meetings.append(Meeting(meeting_id=meetingID[0]))
             meeting = self.meetings[-1]
-            self.right_pane_layout.addWidget(PendingMeetingOverview(meeting))
+            self.right_pane_layout.addWidget(PendingMeetingOverview(meeting, self.user))
             tmp = QStandardItem(meeting.title+"\n"+meeting.place+"\n"+meeting.when+"\n")
             tmp.setCheckable(False)
             self.data.appendRow(tmp)

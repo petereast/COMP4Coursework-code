@@ -33,5 +33,6 @@
     <None Include="RespondToPendingRequestsDialog.py" />
     <None Include="SqlDictionary.py" />
     <None Include="Tasks.py" />
+    <None Include="ChangePasswordDialog.py" />
   </ItemGroup>
 </Project>

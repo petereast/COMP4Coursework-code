@@ -4,6 +4,8 @@ from PyQt4.QtGui import *
 from LoginAction import User
 from GlobalResources import *
 
+from ChangePasswordDialog import *
+
 class UserOverview(QGroupBox):
     def __init__(self, user):
         self.user = user
@@ -33,6 +35,7 @@ class UserOverview(QGroupBox):
     
         self.change_password_button = QPushButton("Change Password")
         self.controls_layout.addWidget(self.change_password_button)
+        self.change_password_button.clicked.connect(self._show_change_password_window)
 
         self.control_bar.setLayout(self.controls_layout)
         self.control_bar.setFixedWidth(300)
@@ -42,6 +45,12 @@ class UserOverview(QGroupBox):
         self.setLayout(self.layout)
         self.setFixedHeight(160)
         self.setTitle("Me")
+    
+    def _show_change_password_window(self):
+        pwdwindow = ChangePasswordDialog(self.user)
+
+        pwdwindow.show()
+        pwdwindow.exec_()
 
 class UserAdminView(QWidget):
     def __init__(self, user):

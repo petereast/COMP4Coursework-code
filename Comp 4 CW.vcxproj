@@ -97,6 +97,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ChangePasswordDialog.py" />
     <None Include="DatabaseInit.py" />
     <None Include="GlobalResources.py" />
     <None Include="IndicatorBadge.py" />

@@ -80,6 +80,12 @@ ADD_MEETING_ATTENDEE = """INSERT INTO MeetingAttendee(MeetingID, UserID, Confirm
 
 GET_MEETING_ATTENDEES = """SELECT UserID FROM MeetingAttendee WHERE (MeetingID = {0})"""
 
+ACCEPT_MEETING = """UPDATE MeetingAttendee SET Confirmed = 1 WHERE {0}"""
+
+REJECT_MEETING = """UPDATE MeetingAttendee SET Confirmed = 0 WHERE {0}"""
+
+DELETE_MEETING = """DELETE FROM MeetingAttendee WHERE {0}"""
+
 # Tasks
 
 GET_TASK = """SELECT * FROM Tasks {0};"""

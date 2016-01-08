@@ -42,7 +42,9 @@ class NewMeetingDialog(QDialog):
 
         self.when_label = QLabel("When")
         self.main_layout.addWidget(self.when_label)
-        self.when_entry = QLineEdit()
+        self.when_entry = QDateTimeEdit()
+        self.when_entry.setMinimumDate(QDate.currentDate())
+        self.when_entry.setMinimumTime(QTime.currentTime())
         self.main_layout.addWidget(self.when_entry)
 
         self.button_container_widget = QWidget()

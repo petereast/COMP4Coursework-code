@@ -5,7 +5,7 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 from Meetings import Meeting
-from DatabaseInit import UsersInfo
+from DatabaseInit import UsersInfo, MeetingsInfo
 #from Meetings import *
 
 class MeetingOverview(QFrame):
@@ -60,18 +60,29 @@ class MeetingOverview(QFrame):
         
 
 class PendingMeetingOverview(MeetingOverview):
-    def __init__(self, meeting):
+    def __init__(self, meeting, user):
         super().__init__(meeting)
-
+        self.meeting = meeting
+        self.user = user
         # Get the owner's name
         owner_name = UsersInfo().get_username_by_uid(meeting.info["OwnerID"])
         self.owner_label.setText("From: {0}".format(owner_name))
 
         self.edit_button.setText("Respond - Confirm")
+        self.edit_button.clicked.connect(self._accept_meeting)
 
         self.deny_button = QPushButton("Respond - Deny")
+        self.deny_button.clicked.connect(self._reject_meeting)
         self.deny_button.setFixedWidth(150)
         self.buttons_layout.addWidget(self.deny_button)
+
+    def _accept_meeting(self):
+        MeetingsInfo().respond_to_attendance_request(True, self.meeting.meeting_id, self.user.id)
+        print("[INFO] Meeting accepted")
+
+    def _reject_meeting(self):
+        MeetingsInfo().respond_to_attendance_request(False, self.meeting.meeting_id, self.user.id)
+        print("[INFO] Meeting Rejected")
 
 class PleaseSelectMeetingPlaceholder(QFrame):
     def __init__(self, empty = False):
