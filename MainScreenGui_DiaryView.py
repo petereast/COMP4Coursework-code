@@ -45,6 +45,8 @@ class DiaryView(QWidget):
             meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
             self.meetings_layout.addWidget(meetings_widgets[-1])
 
+        self._update_meeting_list()
+
 
         self.meetings_widget.setLayout(self.meetings_layout)
         #self.meetings_widget.setMinimumSize(300, 700)
@@ -104,13 +106,24 @@ class DiaryView(QWidget):
         self.setLayout(self.main_layout)
 
     def _update_meeting_list(self):
-        #TODO: This still needs significant work
-        print("[INFO] Attempting to update meetings list")
-        item = self.meetings_layout.takeAt(0)
-        while item:
-            item = self.meetings_layout.takeAt(0)
-            self.meetings_layout.update()
-        print(item)
+        del self.meetings_widget
+
+        self.meetings_widget = QWidget()
+        self.meetings_layout = QVBoxLayout()
+
+        # Start to do a slightly more indepth meetings code
+        # Get meetings from the database
+        # Enumerate these meetings
+        # have an array of meetingss objects
+
+        #Get a list of meetings
+        meetings_list = MeetingsInfo(None).get_meetings_by_owner(self.user.id)
+        print("{0} Meeting(s) found.".format(len(meetings_list)))
+        meetings_widgets = []
+        for m in meetings_list:
+            meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
+            self.meetings_layout.addWidget(meetings_widgets[-1])
+
 
 
     def display_new_meeting_dialog(self):

@@ -49,6 +49,10 @@ class UsersInfo(Database):
 
         return self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 
+    def update_user_password(self, password, uid):
+        sql = SqlDictionary.UPDATE_PASSWORD.format("'{0}'".format(password), uid)
+        return self._connect_and_execute(sql)
+
     # TODO: Add more features as they become necessary.
 
 class TasksInfo(Database):

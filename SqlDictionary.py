@@ -66,6 +66,8 @@ GET_USER_ID = """ SELECT UserID FROM Users WHERE (Username = '{0}');"""
 
 ADD_USER = """INSERT INTO Users(Name, Username, Password, Permissions) VALUES({0});"""
 
+UPDATE_PASSWORD = """UPDATE Users SET Password = {0} WHERE UserID = {1};"""
+
 # Meetings
 
 ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location, Attendees) VALUES({0})"""

@@ -15,13 +15,16 @@ class User:
 
         self.update_user_info()
 
+    def gen_pw_hash(self, password):
+        phash = hashlib.md5()
+        phash.update(bytes(password, "UTF-8"))
+        return phash.hexdigest()
+
     def password_hash_cmp(self, password_input):
         currenthash = self.info["Password"]
-
-        phash = hashlib.md5()
-        phash.update(bytes(password_input, "UTF-8"))
-
-        return currenthash == phash.hexdigest()
+        print(currenthash)
+        print(self.gen_pw_hash(password_input))
+        return currenthash == self.gen_pw_hash(password_input)
 
     def add_user(self, info=None):
 

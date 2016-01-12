@@ -85,6 +85,8 @@ class LoginWindow(QDialog):
         self.password_input.setEchoMode(QLineEdit.Password)
         self.password_input.returnPressed.connect(self._enter_submit)
 
+        self.password_input.setWhatsThis("Enter your password here")
+
         self.password_layout.addWidget(self.password_label)
         self.password_layout.addWidget(self.password_input)
 
@@ -137,7 +139,7 @@ class LoginWindow(QDialog):
         er.raise_()
         er.exec_()
 
-    def login_action(self):
+    def login_action(self, e = None):
         try:
             userid = UsersInfo().get_uid_by_username(self.username_input.text())
             user = User(userid)
