@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from DatabaseInit import UsersInfo
 from GlobalResources import *
 
-class _PWErrorDialog(QDialog):
+class _PWErrorDialog(QDialog): #Blank error dialog
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Error")
@@ -108,7 +108,6 @@ class ChangePasswordDialog(QDialog):
         self.setLayout(self.layout)
     
     def _pwchange_action(self):
-        print("thign")
         # Generate passwrod hash
         # Get password hash from the database
         # Compare the two

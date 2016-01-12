@@ -2,8 +2,15 @@
 # main program
 
 import SqlDictionary
+import random
+import hashlib
  #this tidies all the SQL queries into another namespace
 import sqlite3
+
+def gen_pw_hash(password):
+    phash = hashlib.md5()
+    phash.update(bytes(password, "UTF-8"))
+    return phash.hexdigest()
 
 class Database:
     """This is the general database wrapper that I'll use throughout the system"""
@@ -33,6 +40,18 @@ class UsersInfo(Database):
     # NB: all input MUST be sanitized at this point.
     def create_table(self):
         self._connect_and_execute(SqlDictionary.CREATE_USERS)
+        self._create_initial_admin_user()
+
+    def _create_initial_admin_user(self):
+        # This is to create an initial administrative user in case something happens to the database
+        pwd = "".join([chr(random.choice(range(ord('A'), ord('z')))) for c in range(10)])
+        
+        new_user_info = {"Name":"ADMIN - TMP", "Username":"default_admin", "Password": gen_pw_hash(pwd), "Permissions":31}
+
+        if len(self.get_all_users("WHERE(Username = 'default_admin')")) == 0:
+            self.add_user(new_user_info)
+            print("[INFO] Empty users table detected, adding default user...")
+            print("[INFO] Default user added,\n\tUsername: 'default_admin'\n\tPassword: '{0}'".format(pwd))
 
     def get_all_users(self, condition = ""): # Add a SQL condition? maybe? TODO: refactor this bit
         return self._connect_and_execute(SqlDictionary.GET_ALL_USERS.format(condition))
@@ -45,7 +64,7 @@ class UsersInfo(Database):
 
     def add_user(self, info):
         #info follows the format {"SQL value":Data value}
-        values = "`{0}`, `{1}`, `{2}`, {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
+        values = "'{0}', '{1}', '{2}', {3}".format(info["Name"], info["Username"], info["Password"], info["Permissions"])
 
         return self._connect_and_execute(SqlDictionary.ADD_USER.format(values))
 

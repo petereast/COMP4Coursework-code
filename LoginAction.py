@@ -43,6 +43,14 @@ class User:
         self.info["Permissions"] = raw_info[4]
         self.id = self.info["UserID"]
 
+    def gen_permissions(self):
+        perm = self.info["Permissions"]
+        blist = [False, False, False, False, False]
+        for index, digit in enumerate(bin(int(perm))[2:]):
+            blist[index] = (bool(digit))
+        print(blist)
+        
+
 class UserSession(User):
     def __init__(self):
         print("[USER] [INFO] Session start")

@@ -63,6 +63,8 @@ class MainScreen(QMainWindow):
         # Define the views for the view_switcher
         # Diary View
 
+        self.user.gen_permissions()
+
         diary_view = DiaryView(self.user)
 
         # Task View
