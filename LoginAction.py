@@ -9,6 +9,7 @@ import SqlDictionary
 class User:
     def __init__(self, uid=0):
         self.info = {} # info to be retrieved from the database
+        self.permissions = {}
         self.user_id = uid
 
         self.dbinterface = UsersInfo()
@@ -41,6 +42,7 @@ class User:
         self.info["Username"] = raw_info[2]
         self.info["Password"] =  raw_info[3]
         self.info["Permissions"] = raw_info[4]
+        self.gen_permissions()
         self.id = self.info["UserID"]
 
     def gen_permissions(self):
@@ -48,8 +50,14 @@ class User:
         blist = [False, False, False, False, False]
         for index, digit in enumerate(bin(int(perm))[2:]):
             blist[index] = (bool(digit))
-        print(blist)
-        
+        permissions = {}
+        permissions["Meetings"] = blist[0]
+        permissions["Tasks"] = blist[1]
+        permissions["Resources"] = blist[2]
+        permissions["ChangeOwnData"] = blist[3]
+        permissions["Admin"] = blist[4]
+        self.permissions = permissions
+        return permissions
 
 class UserSession(User):
     def __init__(self):

@@ -9,6 +9,14 @@ from GlobalResources import *
 
 from DatabaseInit import *
 
+class UsernameLookup(QDialog):
+    def __init__(self):
+        super().__init__()
+        pass
+
+    # This will contain a list widget 
+
+
 class NewMeetingDialog(QDialog):
     def __init__(self, user = None):
         super().__init__()
@@ -34,6 +42,8 @@ class NewMeetingDialog(QDialog):
         # self.attendees_entry.textChanged.connect(self._add_attendees)
         self.attendees_info_label = QLabel("A list of usernames seperated by semicolons")
         self.attendees_info_label.setFont(GSmallText)
+
+        # Create a dialog with an index of usernames and users to include
 
         self.where_label = QLabel("Where")
         self.main_layout.addWidget(self.where_label)

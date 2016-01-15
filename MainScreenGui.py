@@ -58,33 +58,39 @@ class MainScreen(QMainWindow):
         self.main_layout.addWidget(self.topbar)
 
         # Finish defining the topbar
-
+        self.view_switcher = QTabWidget()
 
         # Define the views for the view_switcher
         # Diary View
 
-        self.user.gen_permissions()
-
-        diary_view = DiaryView(self.user)
-
+        
+        if self.user.permissions["Meetings"]:
+            diary_view = DiaryView(self.user)
+            self.view_switcher.addTab(diary_view, "Planner")
         # Task View
-        task_view = TaskView(self.user)
+        if self.user.permissions["Tasks"]:
+            task_view = TaskView(self.user)
+            self.view_switcher.addTab(task_view, "Tasks")
 
         # Resources view
-        resources_view = ResourcesView(self.user)
+        if self.user.permissions["Resources"]:
+            resources_view = ResourcesView(self.user)
+            self.view_switcher.addTab(resources_view, "Resources")
+
 
         # User Admin View
-        
-        user_admin_view = UserAdminView(self.user)
+        if self.user.permissions["ChangeOwnData"] or self.user.permissions["Admin"]:
+            user_admin_view = UserAdminView(self.user)
+            self.view_switcher.addTab(user_admin_view, "User Admin")
 
 
         # Define the view switcher
 
-        self.view_switcher = QTabWidget()
-        self.view_switcher.addTab(diary_view, "Planner")
-        self.view_switcher.addTab(task_view, "Tasks")
-        self.view_switcher.addTab(resources_view, "Resources")
-        self.view_switcher.addTab(user_admin_view, "User Admin")
+        
+        
+        
+       
+        
 
         self.view_switcher.setFont(GBodyFont)
 
