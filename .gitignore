@@ -215,3 +215,4 @@ ModelManifest.xml
 
 *.opendb
 __pycache__/
+*.db

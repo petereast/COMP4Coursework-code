@@ -63,7 +63,7 @@ class MainScreen(QMainWindow):
         # Define the views for the view_switcher
         # Diary View
 
-        
+
         if self.user.permissions["Meetings"]:
             diary_view = DiaryView(self.user)
             self.view_switcher.addTab(diary_view, "Planner")
@@ -84,13 +84,8 @@ class MainScreen(QMainWindow):
             self.view_switcher.addTab(user_admin_view, "User Admin")
 
 
-        # Define the view switcher
+        # finish defining the view switcher
 
-        
-        
-        
-       
-        
 
         self.view_switcher.setFont(GBodyFont)
 
@@ -108,5 +103,3 @@ class MainScreen(QMainWindow):
         self.close()
         self.parent.show()
         self.parent.reset()
-        
-        

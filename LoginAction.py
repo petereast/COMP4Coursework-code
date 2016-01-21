@@ -32,8 +32,7 @@ class User:
         if info == None:
             info = self.info
 
-        dbinterface = UsersInfo()
-        dbinterface.add_user(info)
+        UsersInfo().add_user(info)
 
     def update_user_info(self):
         raw_info = self.dbinterface.get_all_users("WHERE(UserID = {0})".format(self.user_id))[0]
@@ -49,7 +48,8 @@ class User:
         perm = self.info["Permissions"]
         blist = [False, False, False, False, False]
         for index, digit in enumerate(bin(int(perm))[2:]):
-            blist[index] = (bool(digit))
+            blist[index] = (bool(int(digit)))
+        print("DEBUG PERMISSIONS:", blist)
         permissions = {}
         permissions["Meetings"] = blist[0]
         permissions["Tasks"] = blist[1]
