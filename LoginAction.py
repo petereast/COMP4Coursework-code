@@ -23,8 +23,6 @@ class User:
 
     def password_hash_cmp(self, password_input):
         currenthash = self.info["Password"]
-        print(currenthash)
-        print(self.gen_pw_hash(password_input))
         return currenthash == self.gen_pw_hash(password_input)
 
     def add_user(self, info=None):
@@ -49,7 +47,6 @@ class User:
         blist = [False, False, False, False, False]
         for index, digit in enumerate(bin(int(perm))[2:]):
             blist[index] = (bool(int(digit)))
-        print("DEBUG PERMISSIONS:", blist)
         permissions = {}
         permissions["Meetings"] = blist[0]
         permissions["Tasks"] = blist[1]
