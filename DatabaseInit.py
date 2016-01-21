@@ -46,11 +46,11 @@ class UsersInfo(Database):
         # This is to create an initial administrative user in case something happens to the database
         pwd = "".join([chr(random.choice(range(ord('A'), ord('z')))) for c in range(10)])
         
-        new_user_info = {"Name":"ADMIN - TMP", "Username":"default_admin", "Password": gen_pw_hash(pwd), "Permissions":31}
+        new_user_info = {"Name":"ADMIN - TMP", "Username":"default_admin", "Password": gen_pw_hash(pwd), "Permissions":16}
 
         if len(self.get_all_users("WHERE(Username = 'default_admin')")) == 0:
-            self.add_user(new_user_info)
             print("[INFO] Empty users table detected, adding default user...")
+            self.add_user(new_user_info)
             print("[INFO] Default user added,\n\tUsername: 'default_admin'\n\tPassword: '{0}'".format(pwd))
 
     def get_all_users(self, condition = ""): # Add a SQL condition? maybe? TODO: refactor this bit

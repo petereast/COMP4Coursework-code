@@ -116,6 +116,7 @@
     <None Include="RespondToPendingRequestsDialog.py" />
     <None Include="SqlDictionary.py" />
     <None Include="Tasks.py" />
+    <None Include="UsernameLookupDialog.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

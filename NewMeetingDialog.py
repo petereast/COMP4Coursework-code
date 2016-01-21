@@ -9,13 +9,7 @@ from GlobalResources import *
 
 from DatabaseInit import *
 
-class UsernameLookup(QDialog):
-    def __init__(self):
-        super().__init__()
-        pass
-
-    # This will contain a list widget 
-
+from UsernameLookupDialog import *
 
 class NewMeetingDialog(QDialog):
     def __init__(self, user = None):
@@ -34,16 +28,28 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.meeting_title_label)
         self.meeting_title_entry = QLineEdit()
         self.main_layout.addWidget(self.meeting_title_entry)
-
+        
         self.attendees_label = QLabel("Attendees:")
         self.main_layout.addWidget(self.attendees_label)
+
+        self.attendees_container = QWidget()
+        self.attendees_layout = QHBoxLayout()
+
         self.attendees_entry = QLineEdit()
-        self.main_layout.addWidget(self.attendees_entry)
+        self.attendees_layout.addWidget(self.attendees_entry)
         # self.attendees_entry.textChanged.connect(self._add_attendees)
+
+        self.username_lookup_button = QPushButton("...")
+        self.username_lookup_button.setFixedWidth(30)
+        self.username_lookup_button.clicked.connect(self.show_username_lookup)  
+        self.attendees_layout.addWidget(self.username_lookup_button)
+
+
+        self.attendees_container.setLayout(self.attendees_layout)
+        self.main_layout.addWidget(self.attendees_container)
         self.attendees_info_label = QLabel("A list of usernames seperated by semicolons")
         self.attendees_info_label.setFont(GSmallText)
-
-        # Create a dialog with an index of usernames and users to include
+       
 
         self.where_label = QLabel("Where")
         self.main_layout.addWidget(self.where_label)
@@ -71,6 +77,7 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.button_container_widget)
 
         self.setLayout(self.main_layout)
+    
 
     def add_meeting(self):
         info = {"OwnerID": self.user.id, # This is where to do the username lookup
@@ -103,6 +110,11 @@ class NewMeetingDialog(QDialog):
             if attendeeID:
                 meeting.add_meeting_attendee(attendeeID)
                 
+    def show_username_lookup(self):
+        u = UsernameLookup(self)
+        u.show()
+        u.raise_()
+        u.exec_()
         
 
         

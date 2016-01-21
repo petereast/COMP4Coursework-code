@@ -34,5 +34,6 @@
     <None Include="SqlDictionary.py" />
     <None Include="Tasks.py" />
     <None Include="ChangePasswordDialog.py" />
+    <None Include="UsernameLookupDialog.py" />
   </ItemGroup>
 </Project>
