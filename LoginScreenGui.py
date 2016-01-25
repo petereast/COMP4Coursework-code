@@ -146,6 +146,7 @@ class LoginWindow(QDialog):
             if not user.password_hash_cmp(self.password_input.text()):
                 self.password_label.setText("Incorrect password, try again:")
                 self._show_error_dialog("Password not recognised")
+                return 0
 
             else:
                 self.main_screen = MainScreen(user, self)
@@ -154,6 +155,7 @@ class LoginWindow(QDialog):
                 self.hide()
         except IndexError:
             self._show_error_dialog("Username not recognised")
+            
 
     def reset(self):
         self.password_input.setText("")

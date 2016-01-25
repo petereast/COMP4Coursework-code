@@ -15,7 +15,7 @@ def gen_pw_hash(password):
 class Database:
     """This is the general database wrapper that I'll use throughout the system"""
     def __init__(self, child, database_name="cmsdb.db"):
-        print("[INFO] Created database object")
+        #print("[INFO] Created database object")
 
         self.db_name = database_name
 

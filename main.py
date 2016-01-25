@@ -1,4 +1,4 @@
-
+#! /usr/bin/env python3
 # import core depenencies
 import sys, time, random
 
