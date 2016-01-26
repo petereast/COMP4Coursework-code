@@ -149,4 +149,4 @@ class MeetingsInfo(Database):
         if attending:
             self._connect_and_execute(SqlDictionary.ACCEPT_MEETING.format("UserID = {0} AND MeetingID = {1}".format(UserID, MeetingID)))
         else:
-            self._connect_and_execute(SqlDictionary.REJECT_MEETING.format("UserID = {0} AND {MeetingID = {1}".format(UserID, MeetingID)))
+            self._connect_and_execute(SqlDictionary.REJECT_MEETING.format("UserID = {0} AND MeetingID = {1}".format(UserID, MeetingID)))

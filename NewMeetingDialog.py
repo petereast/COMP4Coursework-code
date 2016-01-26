@@ -28,7 +28,7 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.meeting_title_label)
         self.meeting_title_entry = QLineEdit()
         self.main_layout.addWidget(self.meeting_title_entry)
-        
+
         self.attendees_label = QLabel("Attendees:")
         self.main_layout.addWidget(self.attendees_label)
 
@@ -41,7 +41,7 @@ class NewMeetingDialog(QDialog):
 
         self.username_lookup_button = QPushButton("...")
         self.username_lookup_button.setFixedWidth(30)
-        self.username_lookup_button.clicked.connect(self.show_username_lookup)  
+        self.username_lookup_button.clicked.connect(self.show_username_lookup)
         self.attendees_layout.addWidget(self.username_lookup_button)
 
 
@@ -49,7 +49,7 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.attendees_container)
         self.attendees_info_label = QLabel("A list of usernames seperated by semicolons")
         self.attendees_info_label.setFont(GSmallText)
-       
+
 
         self.where_label = QLabel("Where")
         self.main_layout.addWidget(self.where_label)
@@ -77,7 +77,7 @@ class NewMeetingDialog(QDialog):
         self.main_layout.addWidget(self.button_container_widget)
 
         self.setLayout(self.main_layout)
-    
+
 
     def add_meeting(self):
         info = {"OwnerID": self.user.id, # This is where to do the username lookup
@@ -97,9 +97,9 @@ class NewMeetingDialog(QDialog):
         pattern = re.compile("([a-zA-Z]+;?)")
         # Iterate through the list of attendees
         print(pattern.findall(raw_attendee_list))
-        
+
         for string in pattern.findall(raw_attendee_list):
-            
+
             if string[-1] == ";":
                 string = string[0:-1]
             try:
@@ -109,12 +109,9 @@ class NewMeetingDialog(QDialog):
                 attendeeID = 0
             if attendeeID:
                 meeting.add_meeting_attendee(attendeeID)
-                
+
     def show_username_lookup(self):
         u = UsernameLookup(self)
-        u.show()
-        u.raise_()
+        #u.show()
+        #u.raise_()
         u.exec_()
-        
-
-        

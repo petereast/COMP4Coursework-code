@@ -72,6 +72,8 @@ class TaskView(QWidget):
 
     def update_task_list(self):
 
+        # Make it so that when the item is clicked, and the check box is 
+
         print("[INFO] Updating task list... ")
         # Add some data from the database
         data = QStandardItemModel()
@@ -82,7 +84,7 @@ class TaskView(QWidget):
         self.tasks = []
         for taskID in ids:
             self.tasks.append(Task(databaseid=taskID))
-            
+
             tmp = QStandardItem(self.tasks[-1].text)
             tmp.setCheckable(True)
             data.appendRow(tmp)

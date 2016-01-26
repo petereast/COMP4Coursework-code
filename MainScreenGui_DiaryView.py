@@ -128,6 +128,7 @@ class DiaryView(QWidget):
 
     def display_new_meeting_dialog(self):
         new_meeting_dialog = NewMeetingDialog(self.user)
+        new_meeting_dialog.show()
         new_meeting_dialog.exec_()
         self._update_meeting_list()
 
