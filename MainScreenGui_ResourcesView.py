@@ -2,6 +2,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from GlobalResources import *
+from DatabaseInit import ResourcesInfo
 
 
 class ResourcesView(QWidget):
@@ -9,6 +10,8 @@ class ResourcesView(QWidget):
 
         self.user = user
         super().__init__()
+
+        print("[INFO] Created ResourcesView")
 
         self.main_layout = QVBoxLayout()
 
@@ -23,9 +26,13 @@ class ResourcesView(QWidget):
         self.left_pane_layout = QVBoxLayout()
 
 
-        self.placeholder = QLabel(" placeholder ")
-        self.placeholder.setFixedSize(400, 400)
-        self.left_pane_layout.addWidget(self.placeholder)
+        self.table = QTableWidget(3, 4)
+        self.table.setHorizontalHeaderLabels(["Name", "Cost", "Quantity", "Quantity Needed"])
+        for col in range(4):
+            self.table.setColumnWidth(col, 580/4)
+        self.table.setFixedSize(600, 400)
+        self.left_pane_layout.addWidget(self.table)
+        self.update_table()
         # This is where I'll define the tabular view.
         # there also needs to be some code for getting sections of information
         # from the database - otherwise it won't work.
@@ -48,3 +55,18 @@ class ResourcesView(QWidget):
         self.main_layout.addWidget(self.pane_container)
 
         self.setLayout(self.main_layout)
+
+    def update_table(self):
+        self.table.clear()
+
+        # Get information from database
+
+        raw_data = ResourcesInfo().get_all_resources()
+
+        # Table dimentions
+        x_total = self.table.columnCount()
+        y_total = len(raw_data)
+        self.table.setHorizontalHeaderLabels(["Name", "Cost", "Quantity", "Quantity Needed"])
+        for x in range(x_total):
+            for y in range(y_total):
+                self.table.setItem(y, x, QTableWidgetItem(str(raw_data[y][x+1])))

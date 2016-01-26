@@ -32,6 +32,19 @@ class Database:
         #print("[INFO] Executed SQL query \"{0}\"".format(sql))
         return results
 
+
+class ResourcesInfo(Database):
+    def __init__(self):
+        super().__init__(self)
+        self.create_table()
+
+    def create_table(self):
+        self._connect_and_execute(SqlDictionary.CREATE_RESOURCES)
+
+    def get_all_resources(self):
+        return self._connect_and_execute(SqlDictionary.GET_ALL_RESOURCES)
+
+
 class UsersInfo(Database):
     def __init__(self, uid = 0):
         super().__init__(self)

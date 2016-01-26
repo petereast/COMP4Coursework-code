@@ -98,5 +98,13 @@ ADD_TASK = """INSERT INTO Tasks(Title, Description, Owner, Attendees) VALUES({0}
 
 GET_USERNAME_BY_UID = """SELECT Name FROM Users WHERE(UserID = {0})"""
 
+# Resources
 
-
+CREATE_RESOURCES = """CREATE TABLE IF NOT EXISTS Resources
+                (ResourceID INTEGER PRIMARY KEY AUTOINCREMENT,
+                ResourceName TEXT,
+                ResourceCost INTEGER,
+                ResourceQuantity INTEGER,
+                ResourceRequiredQuantity INTEGER);
+                """
+GET_ALL_RESOURCES = """SELECT * FROM Resources;"""
