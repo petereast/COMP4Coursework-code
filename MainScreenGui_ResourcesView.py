@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 
 from GlobalResources import *
 from DatabaseInit import ResourcesInfo
+from NewResourceDialog import *
 
 
 class ResourcesView(QWidget):
@@ -44,7 +45,7 @@ class ResourcesView(QWidget):
 
         self.add_items_button = QPushButton("Add Resource")
         self.right_pane_layout.addWidget(self.add_items_button)
-
+        self.add_items_button.clicked.connect(self._open_new_resource_dialog)
         self.view_urgent_requirements_button = QPushButton("View urgent requirements")
         self.right_pane_layout.addWidget(self.view_urgent_requirements_button)
 
@@ -54,7 +55,13 @@ class ResourcesView(QWidget):
         self.pane_container.setLayout(self.pane_container_layout)
         self.main_layout.addWidget(self.pane_container)
 
+
         self.setLayout(self.main_layout)
+
+    def _open_new_resource_dialog(self):
+        dg = NewResourceDialog(self.user)
+        dg.show()
+        dg.exec_()
 
     def update_table(self):
         self.table.clear()
