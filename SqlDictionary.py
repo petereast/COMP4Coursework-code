@@ -70,7 +70,7 @@ UPDATE_PASSWORD = """UPDATE Users SET Password = {0} WHERE UserID = {1};"""
 
 # Meetings
 
-ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location, Attendees) VALUES({0})"""
+ADD_MEETING = """INSERT INTO Meetings(OwnerID, Title, ISOTime, Location) VALUES({0})"""
 
 GET_MEETING = """SELECT * FROM Meetings {0};"""
 

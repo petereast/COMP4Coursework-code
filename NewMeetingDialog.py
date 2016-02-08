@@ -6,9 +6,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from GlobalResources import *
-
 from DatabaseInit import *
-
 from UsernameLookupDialog import *
 
 class NewMeetingDialog(QDialog):
@@ -83,15 +81,16 @@ class NewMeetingDialog(QDialog):
         info = {"OwnerID": self.user.id, # This is where to do the username lookup
             "Title":self.meeting_title_entry.text(),
             "ISOTime":self.when_entry.text(),
-            "Location":self.where_entry.text(),
-            "Attendees": 0 # This will work someday
+            "Location":self.where_entry.text()
         }
         meeting = MeetingsInfo(info)
         meeting.add_meeting()
-        self._add_attendees(meeting)
+        if self._add_attendees(meeting):
+            pass
         self.close()
 
     def _add_attendees(self, meeting):
+        valid = True
         raw_attendee_list = self.attendees_entry.text()
         #Parse this into a list of attendees, seperated by eiter semicolons or commas.
         pattern = re.compile("([a-zA-Z]+;?)")
@@ -107,8 +106,11 @@ class NewMeetingDialog(QDialog):
             except IndexError:
                 print("[WARN] Username '{0}' not recognised".format(string))
                 attendeeID = 0
+                valid = False
+                # Show a warning dialog and prevent the form from completing.
             if attendeeID:
                 meeting.add_meeting_attendee(attendeeID)
+        return valid
 
     def show_username_lookup(self):
         u = UsernameLookup(self)

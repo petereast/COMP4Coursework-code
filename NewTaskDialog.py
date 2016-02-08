@@ -29,13 +29,13 @@ class NewTaskDialog(QDialog):
         self.title_entry.textChanged.connect(self.update_window_title)
         self.main_layout.addWidget(self.title_entry)
 
-        self.people_entry_label = QLabel("With whom:")
-        self.main_layout.addWidget(self.people_entry_label)
+        #self.people_entry_label = QLabel("With whom:")
+        #self.main_layout.addWidget(self.people_entry_label)
 
-        self.people_entry = QLineEdit()
-        self.people_entry.setPlaceholderText("Type usernames here")
-        self.people_entry.textChanged.connect(self.check_names)
-        self.main_layout.addWidget(self.people_entry)
+        #self.people_entry = QLineEdit()
+        #self.people_entry.setPlaceholderText("Type usernames here")
+        #self.people_entry.textChanged.connect(self.check_names)
+        #self.main_layout.addWidget(self.people_entry)
 
         self.description_entry_label = QLabel("Description:")
         self.main_layout.addWidget(self.description_entry_label)
@@ -52,6 +52,8 @@ class NewTaskDialog(QDialog):
 
     def update_window_title(self):
         newtext = self.title_entry.text().title()[0:45]
+        if len(newtext) == 45:
+            newtext += "..."
         if newtext == "":
             self.title.setText("New Task")
         else:
@@ -69,7 +71,7 @@ class NewTaskDialog(QDialog):
     def validate(self):
         valid = True
         valid *= not (self.title_entry.text().strip() == "")
-        valid *= not (self.people_entry.text().strip() == "")
+        # valid *= not (self.people_entry.text().strip() == "")
         valid *= not (self.description_entry.text().strip() == "")
 
         return valid
@@ -82,5 +84,5 @@ class NewTaskDialog(QDialog):
             self.close()
         else:
             self.title_entry.setPlaceholderText("Required")
-            self.people_entry.setPlaceholderText("Required")
+            #self.people_entry.setPlaceholderText("Required")
             self.description_entry.setPlaceholderText("Required")

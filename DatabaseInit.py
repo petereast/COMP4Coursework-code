@@ -127,11 +127,10 @@ class MeetingsInfo(Database):
         self._connect_and_execute(SqlDictionary.CREATE_MEETINGS_ATTENEDEES)
 
     def add_meeting(self):
-        SQL_DATA = "{0}, '{1}', '{2}', '{3}', '{4}'".format(self.meeting_info["OwnerID"],
+        SQL_DATA = "{0}, '{1}', '{2}', '{3}'".format(self.meeting_info["OwnerID"],
             self.meeting_info["Title"],
             self.meeting_info["ISOTime"],
-            self.meeting_info["Location"],
-            self.meeting_info["Attendees"])
+            self.meeting_info["Location"])
         self._connect_and_execute(SqlDictionary.ADD_MEETING.format(SQL_DATA)) #TODO Sort out the formatting.
         self.id = self._connect_and_execute("SELECT Max(MeetingID) FROM Meetings;")[0][0]
 
