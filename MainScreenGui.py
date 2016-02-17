@@ -20,8 +20,6 @@ except ImportError:
 
 
 # Requires seperate widgets for each view in the tabbed layout
-# Implementation of the tabbed layout could use a QStackedLayout
-
 class MainScreen(QMainWindow):
     def __init__(self, user=None, parent=None):
         self.user = user
@@ -42,6 +40,8 @@ class MainScreen(QMainWindow):
         self.tb_help_button = QPushButton("?")
         self.tb_help_button.setFixedWidth(30)
 
+
+        # Create a spacer to keep the thing spaced out
         self.tb_spacer = QLabel("  ")
         self.tb_spacer.setFixedWidth(600)
 
@@ -55,6 +55,7 @@ class MainScreen(QMainWindow):
 
         self.topbar.setLayout(self.topbar_layout)
 
+        # End of the topobar widget
         self.main_layout.addWidget(self.topbar)
 
         # Finish defining the topbar
@@ -62,26 +63,24 @@ class MainScreen(QMainWindow):
 
         # Define the views for the view_switcher
         # Diary View
-
-
         if self.user.permissions["Meetings"]:
-            diary_view = DiaryView(self.user)
-            self.view_switcher.addTab(diary_view, "Planner")
+            self.diary_view = DiaryView(self.user)
+            self.view_switcher.addTab(self.diary_view, "Planner")
         # Task View
         if self.user.permissions["Tasks"]:
-            task_view = TaskView(self.user)
-            self.view_switcher.addTab(task_view, "Tasks")
+            self.task_view = TaskView(self.user)
+            self.view_switcher.addTab(self.task_view, "Tasks")
 
         # Resources view
         if self.user.permissions["Resources"]:
-            resources_view = ResourcesView(self.user)
-            self.view_switcher.addTab(resources_view, "Resources")
+            self.resources_view = ResourcesView(self.user)
+            self.view_switcher.addTab(self.resources_view, "Resources")
 
 
         # User Admin View
         if self.user.permissions["ChangeOwnData"] or self.user.permissions["Admin"]:
-            user_admin_view = UserAdminView(self.user)
-            self.view_switcher.addTab(user_admin_view, "User Admin")
+            self.user_admin_view = UserAdminView(self.user)
+            self.view_switcher.addTab(self.user_admin_view, "User Admin")
 
 
         # finish defining the view switcher

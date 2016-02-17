@@ -115,10 +115,6 @@ class LoginWindow(QDialog):
         self.buttons_widget = QWidget()
         self.buttons_widget.setFixedWidth(300)
         self.buttons_widget.setLayout(self.button_layout)
-        # TODO:
-        # - include interactions with the user/pass entry
-        # - Make the title bigger/change the font?
-        # - Anything else?
 
         self.layout = QVBoxLayout()
 
@@ -141,26 +137,43 @@ class LoginWindow(QDialog):
 
     def login_action(self, e = None):
         try:
+            # Get  the user's id
             userid = UsersInfo().get_uid_by_username(self.username_input.text())
-            user = User(userid)
+
+            # Create a User object with data related to the current userid
+            user = User(userid) # User - class defined in LoginAction.py
+
+            # If the hash of the input password does not match the stored hash
             if not user.password_hash_cmp(self.password_input.text()):
-                self.password_label.setText("Incorrect password, try again:")
+
+                # Show the warning dialog
                 self._show_error_dialog("Password not recognised")
+                # End the execution of the function.
                 return 0
 
             else:
+
+                # Create and run an instance of the MainScree GUI.
                 self.main_screen = MainScreen(user, self)
                 self.main_screen.show()
                 self.main_screen.raise_()
+
+                # Hide this window.
                 self.hide()
+
+        # If the search for the useername does not return any results:
         except IndexError:
             self._show_error_dialog("Username not recognised")
-            
+
 
     def reset(self):
+
+        # Set both the input fields to ""
         self.password_input.setText("")
         self.username_input.setText("")
 
+
+    # Event handler for pressing enter key.
     def _enter_submit(self, e = None):
 
         self.login_action(self)

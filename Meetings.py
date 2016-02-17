@@ -31,10 +31,6 @@ class Meeting:
         raw_info = dbmeeting.get_meeting_info()
         self.info = {"Title":raw_info[2], "Location":raw_info[4], "ISOTime":raw_info[3], "MeetingID":raw_info[0], "OwnerID":raw_info[1]}
 
-        # TODO: Add code to get the attendees from the MeetingAttendee table
-
-        pass
-
     def _update_info(self):
         self.title = self.info["Title"]
         self.place = self.info["Location"]
@@ -45,7 +41,7 @@ class Meeting:
 
     def _get_attendees_from_database(self):
         attendees = MeetingsInfo().get_meeting_attendees(self.meeting_id)
-        
+
         for a in attendees:
             attendee_id = a[0]
             # Lookup the username

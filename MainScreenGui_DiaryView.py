@@ -106,10 +106,7 @@ class DiaryView(QWidget):
         self.setLayout(self.main_layout)
 
     def _update_meeting_list(self):
-        del self.meetings_widget
-
-        self.meetings_widget = QWidget()
-        self.meetings_layout = QVBoxLayout()
+        self.meetings_layout.clear()
 
         # Start to do a slightly more indepth meetings code
         # Get meetings from the database
@@ -124,6 +121,8 @@ class DiaryView(QWidget):
             meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
             self.meetings_layout.addWidget(meetings_widgets[-1])
 
+        self.pending_number.update(len(MeetingsInfo().get_outstanding_meetings(self.user.id)))
+
 
 
     def display_new_meeting_dialog(self):
@@ -133,6 +132,6 @@ class DiaryView(QWidget):
         self._update_meeting_list()
 
     def display_respond_to_meetings_dialog(self):
-        self.pending_number.update(self.pending_number.getValue()-1)
         respond_to_meetings_dialog = RespondToPendingMeetingDialog(self.user)
         respond_to_meetings_dialog.exec_()
+        self._update_meeting_list()

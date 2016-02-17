@@ -9,6 +9,7 @@ from NewResourceDialog import *
 class ResourcesView(QWidget):
     def __init__(self, user):
 
+        # `user` - reference to instance created in 
         self.user = user
         super().__init__()
 
@@ -31,7 +32,7 @@ class ResourcesView(QWidget):
         self.table.setHorizontalHeaderLabels(["Name", "Cost", "Quantity", "Quantity Needed"])
         for col in range(4):
             self.table.setColumnWidth(col, 580/4)
-        self.table.setFixedSize(600, 400)
+        self.table.setFixedSize(601, 400)
         self.left_pane_layout.addWidget(self.table)
         self.update_table()
         # This is where I'll define the tabular view.
@@ -73,6 +74,7 @@ class ResourcesView(QWidget):
         # Table dimentions
         x_total = self.table.columnCount()
         y_total = len(raw_data)
+        self.table.setRowCount(y_total)
         self.table.setHorizontalHeaderLabels(["Name", "Cost", "Quantity", "Quantity Needed"])
         for x in range(x_total):
             for y in range(y_total):

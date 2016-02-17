@@ -6,7 +6,6 @@ from PyQt4.QtGui import *
 from GlobalResources import *
 
 class Indicator(QFrame):
-    """docstring for """
     def __init__(self, value = 0):
         super().__init__()
         self.value = value
