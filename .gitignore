@@ -218,3 +218,4 @@ __pycache__/
 *.db
 
 linecounter.py
+all.py

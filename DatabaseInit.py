@@ -1,10 +1,10 @@
 # DatabaseInit
 # main program
 
+#This tidies all of the SQL queries into another namespace.
 import SqlDictionary
 import random
 import hashlib
- #this tidies all the SQL queries into another namespace
 import sqlite3
 
 def gen_pw_hash(password):
