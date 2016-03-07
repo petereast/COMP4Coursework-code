@@ -44,6 +44,9 @@ class ResourcesInfo(Database):
     def get_all_resources(self):
         return self._connect_and_execute(SqlDictionary.GET_ALL_RESOURCES)
 
+    def add_resources(self):
+        pass
+
 
 class UsersInfo(Database):
     def __init__(self, uid = 0):
@@ -85,7 +88,6 @@ class UsersInfo(Database):
         sql = SqlDictionary.UPDATE_PASSWORD.format("'{0}'".format(password), uid)
         return self._connect_and_execute(sql)
 
-    # TODO: Add more features as they become necessary.
 
 class TasksInfo(Database):
 
