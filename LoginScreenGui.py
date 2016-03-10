@@ -122,7 +122,6 @@ class LoginWindow(QDialog):
         self.layout.addWidget(self.username_item)
         self.layout.addWidget(self.password_item)
         self.layout.addWidget(self.buttons_widget)
-        #self.layout.addWidget()
 
         self.setLayout(self.layout)
         self.setFont(GBodyFont)
@@ -153,7 +152,7 @@ class LoginWindow(QDialog):
 
             else:
 
-                # Create and run an instance of the MainScree GUI.
+                # Create and run an instance of the MainScreen GUI.
                 self.main_screen = MainScreen(user, self)
                 self.main_screen.show()
                 self.main_screen.raise_()
