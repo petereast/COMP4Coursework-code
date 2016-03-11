@@ -6,13 +6,14 @@ def code_list():
     complete_code = []
     total = 0
     dir = os.listdir(os.getcwd())
-    for file in dir:
-        if file[-2:] == "py" and file != "linecounter.py":
-            with open(file) as f:
-                c = f.readlines()
+    for fi in dir:
+        if fi[-2:] == "py" and fi not in  ["linecounter.py", "all.py"]:
+            with open(fi) as f:
+                li = f.readlines()
+                c = ["# file - {0} - {1} lines\n".format(fi, len(li))]+li
                 complete_code += c
-                total += len(c)
-                print("Read {0}".format(file))
+                total += len(li)
+                print("Read {0}".format(fi))
     print("".join(complete_code), file=open("all.py", "w"))
     return total
 print(code_list(), "Lines of code")

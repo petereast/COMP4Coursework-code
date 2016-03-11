@@ -36,13 +36,13 @@ class ChangePasswordDialog(QDialog):
 
         INPUT_WIDTH = 400
         LABEL_WIDTH = 200
-        
+
         self.user = user
-        
+
         self.setWindowTitle("Change your password")
-               
+
         self.layout = QVBoxLayout()
-        
+
         self.title = QLabel("Change your password")
         self.title.setFont(GTitleFont)
         self.layout.addWidget(self.title)
@@ -53,7 +53,7 @@ class ChangePasswordDialog(QDialog):
         self.pw_current_entry_label = QLabel("Enter your current password:")
         self.pw_current_entry_label.setFixedWidth(LABEL_WIDTH)
         self.pw_current_entry.setEchoMode(QLineEdit.Password)
-        
+
         self.pw_container_layout = QHBoxLayout()
         self.pw_container_layout.addWidget(self.pw_current_entry_label)
         self.pw_container_layout.addWidget(self.pw_current_entry)
@@ -104,9 +104,9 @@ class ChangePasswordDialog(QDialog):
         self.layout.addWidget(self.button_container)
 
         self.setFont(GBodyFont)
-        
+
         self.setLayout(self.layout)
-    
+
     def _pwchange_action(self):
         # Generate passwrod hash
         # Get password hash from the database
@@ -115,14 +115,15 @@ class ChangePasswordDialog(QDialog):
         # should be easy
 
         # Check that the pw entry and the pwconfirm are equal
-        
+
         passwords_the_same = self.confirm_pw_entry.text() == self.new_pw_entry.text()
         current_pw_correct = self.user.password_hash_cmp(self.pw_current_entry.text())
-        
+
         if passwords_the_same and current_pw_correct:
             UsersInfo().update_user_password(User.gen_pw_hash(None, self.new_pw_entry.text()), self.user.id)
             self.close()
             # Proceed to change the password
+            print("[DEBUG] Passwords changed successfully (ChangePasswordDialog.py:126)")
         elif not passwords_the_same and current_pw_correct:
             e = _PWMismatchErrorDialog()
             e.show()

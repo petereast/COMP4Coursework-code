@@ -51,7 +51,7 @@ class NewTaskDialog(QDialog):
         self.setFont(GBodyFont)
 
     def update_window_title(self):
-        newtext = self.title_entry.text().title()[0:45]
+        newtext = self.title_entry.text()[0:45]
         if len(newtext) == 45:
             newtext += "..."
         if newtext == "":
