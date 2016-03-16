@@ -108,7 +108,7 @@ class ChangePasswordDialog(QDialog):
         self.setLayout(self.layout)
 
     def _pwchange_action(self):
-        # Generate passwrod hash
+        # Generate password hash
         # Get password hash from the database
         # Compare the two
         # if correct, update the database entry for the password

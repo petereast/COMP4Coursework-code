@@ -9,7 +9,7 @@ from NewResourceDialog import *
 class ResourcesView(QWidget):
     def __init__(self, user):
 
-        # `user` - reference to instance created in 
+        # `user` - reference to instance created in
         self.user = user
         super().__init__()
 
@@ -47,6 +47,8 @@ class ResourcesView(QWidget):
         self.add_items_button = QPushButton("Add Resource")
         self.right_pane_layout.addWidget(self.add_items_button)
         self.add_items_button.clicked.connect(self._open_new_resource_dialog)
+        self.edit_resource_button = QPushButton("Edit Resource")
+        self.right_pane_layout.addWidget(self.edit_resource_button)
         self.view_urgent_requirements_button = QPushButton("View urgent requirements")
         self.right_pane_layout.addWidget(self.view_urgent_requirements_button)
 
