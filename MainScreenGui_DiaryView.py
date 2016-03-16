@@ -37,13 +37,13 @@ class DiaryView(QWidget):
         # Enumerate these meetings
         # have an array of meetingss objects
 
-        #Get a list of meetings
-        self.meetings_list = MeetingsInfo(None).get_meetings_by_owner(user.id)
-        print("{0} Meeting(s) found.".format(len(self.meetings_list)))
-        self.meetings_widgets = []
-        for m in self.meetings_list:
-            self.meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
-            self.meetings_layout.addWidget(self.meetings_widgets[-1])
+        # #Get a list of meetings
+        # self.meetings_list = MeetingsInfo(None).get_meetings_by_owner(user.id)
+        # print("{0} Meeting(s) found.".format(len(self.meetings_list)))
+        # self.meetings_widgets = []
+        # for m in self.meetings_list:
+        #     self.meetings_widgets.append(MeetingOverview(Meeting(meeting_id=m[0])))
+        #     self.meetings_layout.addWidget(self.meetings_widgets[-1])
 
         self.meetings_widget.setLayout(self.meetings_layout)
         #self.meetings_widget.setMinimumSize(300, 700)
@@ -105,8 +105,11 @@ class DiaryView(QWidget):
         # Update the list of meetings
         self._update_meeting_list()
 
-        
+
     def _update_meeting_list(self):
+
+        # This needs to be re-written so it works.
+
         # Remove all widgets
         for index in range(self.meetings_layout.count()):
             self.meetings_layout.removeItem(self.meetings_layout.itemAt(index))
