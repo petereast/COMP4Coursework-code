@@ -63,14 +63,16 @@ def unconjoin_files(conjoined_file_data):
 	# creates a directory containing the various files that have been squashed
 	inlines = conjoined_file_data.split("\n")
 	startline, endline, alternator = 0, 0, False
+
+	outfiles = []
+	startlines = [] 
+
 	for index, line in enumerate(inlines):
 		if line[:3] == "@@@":
 			filename = line[3:line.find("@@@", 4)]
-			if not alternator:
-				startline = index
-			else:
-				endline = index
-				print(startline, endline)
+			startlines.append(index)
+
+	print("len slines:", len(startlines))
 print(squash_file("main.py"))
 #Testing stuff
 filenames_set = {"main.py"}
