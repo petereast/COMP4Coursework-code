@@ -66,6 +66,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.swp
 
 # Chutzpah Test files
 _Chutzpah*
@@ -220,3 +221,4 @@ __pycache__/
 linecounter.py
 all.py
 attscan.py
+/.project

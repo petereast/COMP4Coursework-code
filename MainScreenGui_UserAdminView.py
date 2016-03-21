@@ -26,9 +26,9 @@ class UserOverview(QGroupBox):
         self.controls_layout = QHBoxLayout()
 
         #Controls:
-        self.rename_button = QPushButton("Change Name")
-        self.controls_layout.addWidget(self.rename_button)
-        self.rename_button.setDisabled(not self.user.permissions["ChangeOwnData"])
+        # self.rename_button = QPushButton("Change Name")
+        # self.controls_layout.addWidget(self.rename_button)
+        # self.rename_button.setDisabled(not self.user.permissions["ChangeOwnData"])
 
         self.change_password_button = QPushButton("Change Password")
         self.controls_layout.addWidget(self.change_password_button)
